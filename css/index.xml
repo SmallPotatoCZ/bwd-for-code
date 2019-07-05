@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Csses on EsilyZhang 的备忘单</title>
+    <link>https://bwd.zhangchao.online/css/</link>
+    <description>Recent content in Csses on EsilyZhang 的备忘单</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	<atom:link href="https://bwd.zhangchao.online/css/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sass</title>
+      <link>https://bwd.zhangchao.online/css/sass/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bwd.zhangchao.online/css/sass/</guid>
+      <description>Basics {: .-three-column}
+Variables $red: #833;body { color: $red; } Nesting .markdown-body { p { color: blue; } &amp;amp;:hover { color: red; } } Comments /* Block comments */ // Line comments Mixins @mixinheading-font { font-family: sans-serif; font-weight: bold; }h1 { @includeheading-font; } with parameters @mixinfont-size($n) { font-size: $n * 1.2em; }body { @includefont-size(2); } with default values @mixinpad($n: 10px) { padding: $n; }body { @includepad(15px); } with a default variable // Set a default value $default-padding: 10px;@mixinpad($n: $default-padding) { padding: $n; }body { @includepad(15px); } Extend .</description>
+    </item>
+    
+  </channel>
+</rss>

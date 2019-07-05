@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/cli/adb/</loc>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/categories/apps/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/apps/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/categories/cli/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/categories/css/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/cli/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/css/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/javascript/es6/</loc>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/categories/javascript/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/javascript/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/css/sass/</loc>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/apps/vscode/</loc>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/tags/featured/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

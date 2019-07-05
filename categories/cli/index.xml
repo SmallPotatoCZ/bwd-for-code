@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CLI on EsilyZhang 的备忘单</title>
+    <link>https://bwd.zhangchao.online/categories/cli/</link>
+    <description>Recent content in CLI on EsilyZhang 的备忘单</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	<atom:link href="https://bwd.zhangchao.online/categories/cli/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>adb (Android Debug Bridge)</title>
+      <link>https://bwd.zhangchao.online/cli/adb/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bwd.zhangchao.online/cli/adb/</guid>
+      <description>Device Basics    Command Description     adb devices Lists connected devices   adb devices -l Lists connected devices and kind   &amp;mdash; &amp;mdash;   adb root Restarts adbd with root permissions   adb start-server Starts the adb server   adb kill-server Kills the adb server   adb remount Remounts file system with read/write access   adb reboot Reboots the device   adb reboot bootloader Reboots the device into fastboot   adb disable-verity Reboots the device into fastboot    wait-for-device can be specified after adb to ensure that the command will run once the device is connected.</description>
+    </item>
+    
+  </channel>
+</rss>

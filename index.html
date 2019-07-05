@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="generator" content="Hugo 0.55.6" />
+    <meta charset='utf-8'>
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<link href='/favicon.png' rel='shortcut icon'>
+<meta content='' name='app:pageurl'>
+
+
+
+
+
+
+
+<link rel="canonical" href="">
+<meta name="og:url" content="">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <title>EsilyZhang 的备忘单</title>
+    
+    <link rel="stylesheet" href="/sass/main.min.ecb251ca6e9aa6da8f72a6ffef89852dc728315d3683f24f903bb1d6e525267f.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    
+</head>
+
+<body>
+    <header role="heading">
+        <nav class='top-nav' data-js-no-preview role='navigation'>
+    <div class='container'>
+        
+        <div class='left'>
+            <a class='back-button icons' href='/'>keyboard_backspace</a>
+        </div>
+        
+
+        <a class='brand' href='/'>
+            EsilyZhang 的备忘单
+        </a>
+    </div>
+</nav>
+    </header>
+    <main role="main">
+        
+<div class='site-header' role='banner'>
+    <h1>
+        EsilyZhang 的备忘单
+    </h1>
+    <p>
+        EsilyZhang 的代码备忘单。 - <a class="a_none" href="https://devhints.io/" target="_blank">项目原地址</a>
+    </p>
+
+    <form action="#" method='get' class="search">
+    <label class='search-box'>
+        <span class='prefix'>bwd.zhangchao.online</span>
+        <span class='sep'>/</span>
+        <input id="page-search-input" name='q' type='text' autofocus placeholder='搜索...'>
+    </label>
+</form>
+
+<script>
+    window.onload = function () {
+        const searchInput = document.querySelector("#page-search-input");
+        const pageItems = document.querySelectorAll(".page-list-btn");
+        searchInput.oninput = function () {
+            pageItems.forEach(ele => {
+                let _reg = RegExp(searchInput.value);
+                if (_reg.test(ele.innerText, 'ig')) {
+                    ele.hidden = false;
+                } else {
+                    console.log("ddd", ele.hidden);
+                    ele.hidden = true;
+                }
+            });
+        };
+    };
+</script>
+</div>
+
+
+<div class='page-list'>
+    <div class="page-list-featured">
+        
+        <a class='page-list-item a_none' href="cli/">
+    <code class='slug'>adb</code>
+</a>
+        
+        <a class='page-list-item a_none' href="javascript/">
+    <code class='slug'>es6</code>
+</a>
+        
+        <a class='page-list-item a_none' href="css/">
+    <code class='slug'>sass</code>
+</a>
+        
+        <a class='page-list-item a_none' href="apps/">
+    <code class='slug'>vscode</code>
+</a>
+        
+    </div>
+
+    <h2 class='category'>
+        最近更新
+    </h2>
+    
+    <a class="a_none page-item  page-list-btn"
+        href="cli//adb">adb
+        <span class="state"></span>
+        <span class="info">adb (Android Debug Bridge)</span>
+    </a>
+    
+    <a class="a_none page-item  page-list-btn"
+        href="javascript//es6">es6
+        <span class="state"></span>
+        <span class="info">ES2015&#43;</span>
+    </a>
+    
+    <a class="a_none page-item  page-list-btn"
+        href="css//sass">sass
+        <span class="state"></span>
+        <span class="info">Sass</span>
+    </a>
+    
+    <a class="a_none page-item  page-list-btn"
+        href="apps//vscode">vscode
+        <span class="state"></span>
+        <span class="info">Visual Studio Code</span>
+    </a>
+    
+    
+    <h2 class='category'>
+        Apps
+    </h2>
+    
+    
+    <a class="a_none page-item  page-list-btn"
+        href="apps//vscode">vscode
+        <span class="state"></span>
+        <span class="info">Visual Studio Code</span>
+    </a>
+    
+    
+    <h2 class='category'>
+        CLI
+    </h2>
+    
+    
+    <a class="a_none page-item  page-list-btn"
+        href="cli//adb">adb
+        <span class="state"></span>
+        <span class="info">adb (Android Debug Bridge)</span>
+    </a>
+    
+    
+    <h2 class='category'>
+        CSS
+    </h2>
+    
+    
+    <a class="a_none page-item  page-list-btn"
+        href="css//sass">sass
+        <span class="state"></span>
+        <span class="info">Sass</span>
+    </a>
+    
+    
+    <h2 class='category'>
+        JavaScript
+    </h2>
+    
+    
+    <a class="a_none page-item  page-list-btn"
+        href="javascript//es6">es6
+        <span class="state"></span>
+        <span class="info">ES2015&#43;</span>
+    </a>
+    
+    
+
+</div>
+
+    </main>
+
+    <footer>
+        
+        
+        
+    </footer>
+
+</body>
+
+</html>

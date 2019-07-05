@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<link href='/favicon.png' rel='shortcut icon'>
+<meta content='' name='app:pageurl'>
+
+
+
+
+
+
+
+<link rel="canonical" href="">
+<meta name="og:url" content="">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <title>EsilyZhang 的备忘单</title>
+    
+    <link rel="stylesheet" href="/sass/main.min.ecb251ca6e9aa6da8f72a6ffef89852dc728315d3683f24f903bb1d6e525267f.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+
+<link rel="stylesheet" href="/sass/markdown.min.927f665213baf4b2bcce6f05882b082730be68f37fb051ad2dc1666566559b58.css">
+
+</head>
+
+<body>
+    <header role="heading">
+        <nav class='top-nav' data-js-no-preview role='navigation'>
+    <div class='container'>
+        
+        <div class='left'>
+            <a class='back-button icons' href='/'>keyboard_backspace</a>
+        </div>
+        
+
+        <a class='brand' href='/'>
+            EsilyZhang 的备忘单
+        </a>
+    </div>
+</nav>
+    </header>
+    <main role="main">
+        
+<div class='site-header' role='banner'>
+    <h1>
+        CLI - 备忘录
+    </h1>
+</div>
+<div class="md_content">
+    <div id="sheet_box">
+    <div id="sheet_column" hidden></div>
+    
+
+    <script>
+        let colNum = document.querySelector("#sheet_column").innerText;
+        const sheetBox = document.body.querySelector("#sheet_box");
+        let eleList = [];
+        Array.prototype.max = function () {
+            return Math.max.apply(null, this);
+        };
+
+        for (let key in sheetBox.children) {
+            eleList.push(sheetBox.children[key]);
+        }
+        let _section, _wrap, _x = 0,
+            _y = 0;
+        eleList.forEach(ele => {
+            if (ele.localName === "h2") {
+                _section = document.createElement("div");
+                _wrap = document.createElement("div");
+                _wrap.className = "h3_wrap";
+                _section.className = "h2_section";
+                _section.appendChild(ele);
+                sheetBox.appendChild(_section);
+                sheetBox.appendChild(_wrap);
+                _x = 0;
+                _y = 0;
+            }
+            if (ele.localName === "h3") {
+                _section = document.createElement("div");
+                _section.className = "h3_section";
+                if (!_wrap) {
+                    _wrap = document.createElement("div");
+                    _wrap.className = "h3_wrap";
+                }
+                if (colNum === "2") {
+                    _section.style.width = "49.4%";
+                } else {
+                    _section.style.width = "32.8%";
+                }
+                _section.appendChild(ele);
+                _wrap.appendChild(_section);
+            }
+            if (_section && ele.localName && ele.localName !== "script") {
+                _section.appendChild(ele);
+            }
+        });
+
+        function layout(col, _onlyChangeWidth) {
+            let _w = sheetBox.offsetWidth;
+            const _tars = sheetBox.querySelectorAll(".h3_wrap");
+            let _e_offset = _w * 1.012 / col;
+
+            _tars.forEach(t => {
+                let _hs = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+                let es = [];
+                let _h3_wrap_height = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+                for (let key in t.children) {
+                    if (t.children[key].localName) {
+                        es.push(t.children[key]);
+                    }
+                }
+                es.forEach((e, i) => {
+                    let _colOrder = i % col;
+                    e.style.left = _colOrder * _e_offset + 'px';
+                    e.style.top = _hs[_colOrder] + 'px';
+                    e.style.width = (_w - (col - 1) * _w * 0.012) / col + 'px';
+                    _hs[_colOrder] += e.offsetHeight + 8;
+                    _h3_wrap_height[_colOrder] += e.offsetHeight + 8;
+
+                })
+                t.style.height = _h3_wrap_height.max() + 'px';
+            })
+        }
+
+        colNum = Number(colNum) ? Number(colNum) : 3;
+        let _colCounter;
+        if (window.innerWidth > 768) {
+            _colCounter = colNum;
+        } else if (window.innerWidth > 480) {
+            _colCounter = colNum - 1 <= 0 ? colNum : colNum - 1;
+        } else {
+            _colCounter = colNum - 2 <= 0 ? colNum - 1 <= 0 ? colNum : colNum - 1 : colNum - 2;
+        }
+        layout(_colCounter);
+        window.onresize = function () {
+            let _cols;
+            if (window.innerWidth >= 768) {
+                _cols = colNum;
+            } else if (window.innerWidth > 480) {
+                _cols = colNum - 1 <= 0 ? colNum : colNum - 1;
+            } else {
+                _cols = colNum - 2 <= 0 ? colNum - 1 <= 0 ? colNum : colNum - 1 : colNum - 2;
+            }
+            layout(_cols);
+        }
+    </script>
+</div>
+</div>
+
+    </main>
+
+    <footer>
+        
+        
+        
+    </footer>
+
+</body>
+
+</html>

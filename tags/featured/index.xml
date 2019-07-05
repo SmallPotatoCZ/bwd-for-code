@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>featured on EsilyZhang 的备忘单</title>
+    <link>https://bwd.zhangchao.online/tags/featured/</link>
+    <description>Recent content in featured on EsilyZhang 的备忘单</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	<atom:link href="https://bwd.zhangchao.online/tags/featured/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>adb (Android Debug Bridge)</title>
+      <link>https://bwd.zhangchao.online/cli/adb/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bwd.zhangchao.online/cli/adb/</guid>
+      <description>Device Basics    Command Description     adb devices Lists connected devices   adb devices -l Lists connected devices and kind   &amp;mdash; &amp;mdash;   adb root Restarts adbd with root permissions   adb start-server Starts the adb server   adb kill-server Kills the adb server   adb remount Remounts file system with read/write access   adb reboot Reboots the device   adb reboot bootloader Reboots the device into fastboot   adb disable-verity Reboots the device into fastboot    wait-for-device can be specified after adb to ensure that the command will run once the device is connected.</description>
+    </item>
+    
+    <item>
+      <title>ES2015&#43;</title>
+      <link>https://bwd.zhangchao.online/javascript/es6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bwd.zhangchao.online/javascript/es6/</guid>
+      <description>Scope Block scoping Let function fn () { let x = 0 if (true) { let x = 1 // only inside this `if`  } }  Const const a = 1  let is the new var. Constants work just like let, but can&amp;rsquo;t be reassigned. See: Let and const
+Backtick strings Interpolation const message = `Hello ${name}`  Multiline strings const str = ` hello world `  Templates and multiline strings.</description>
+    </item>
+    
+    <item>
+      <title>Sass</title>
+      <link>https://bwd.zhangchao.online/css/sass/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bwd.zhangchao.online/css/sass/</guid>
+      <description>Basics {: .-three-column}
+Variables $red: #833;body { color: $red; } Nesting .markdown-body { p { color: blue; } &amp;amp;:hover { color: red; } } Comments /* Block comments */ // Line comments Mixins @mixinheading-font { font-family: sans-serif; font-weight: bold; }h1 { @includeheading-font; } with parameters @mixinfont-size($n) { font-size: $n * 1.2em; }body { @includefont-size(2); } with default values @mixinpad($n: 10px) { padding: $n; }body { @includepad(15px); } with a default variable // Set a default value $default-padding: 10px;@mixinpad($n: $default-padding) { padding: $n; }body { @includepad(15px); } Extend .</description>
+    </item>
+    
+    <item>
+      <title>Visual Studio Code</title>
+      <link>https://bwd.zhangchao.online/apps/vscode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bwd.zhangchao.online/apps/vscode/</guid>
+      <description>Shortcuts Command palette    Key Description     ⇧⌘P Show all commands   ⇧⌘P Show all commands   ⌘P Show files    Sidebars    Key Description     ⌘B Toggle sidebar   ⇧⌘E Explorer   ⇧⌘F Search   ⇧⌘D Debug   ⇧⌘X Extensions   ⇧^G Git (SCM)    Search    Key Description     ⌘F Find   ⌥⌘F Replace   ⇧⌘F Find in files   ⇧⌘H Replace in files    Panel    Key Description     ⌘J Toggle panel   ⇧⌘M Problems   ⇧⌘U Output   ⇧⌘Y Debug console   ^` Terminal    View    Key Description     ⌘k z Zen mode   ⌘k u Close unmodified   ⌘k w Close all    Debug    Key Description     F5 Start   ⇧F5 Stop   ⇧⌘F5 Restart   ^F5 Start without debugging   F9 Toggle breakpoint   F10 Step over   F11 Step into   ⇧F11 Step out   ⇧⌘D Debug sidebar   ⇧⌘Y Debug panel    References  Keyboard shortcuts (MacOS) (code.</description>
+    </item>
+    
+  </channel>
+</rss>

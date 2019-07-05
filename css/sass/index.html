@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<link href='/favicon.png' rel='shortcut icon'>
+<meta content='' name='app:pageurl'>
+
+
+
+
+
+
+
+<link rel="canonical" href="">
+<meta name="og:url" content="">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <title>EsilyZhang 的备忘单</title>
+    
+    <link rel="stylesheet" href="/sass/main.min.ecb251ca6e9aa6da8f72a6ffef89852dc728315d3683f24f903bb1d6e525267f.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+
+<link rel="stylesheet" href="/sass/markdown.min.927f665213baf4b2bcce6f05882b082730be68f37fb051ad2dc1666566559b58.css">
+
+</head>
+
+<body>
+    <header role="heading">
+        <nav class='top-nav' data-js-no-preview role='navigation'>
+    <div class='container'>
+        
+        <div class='left'>
+            <a class='back-button icons' href='/'>keyboard_backspace</a>
+        </div>
+        
+
+        <a class='brand' href='/'>
+            EsilyZhang 的备忘单
+        </a>
+    </div>
+</nav>
+    </header>
+    <main role="main">
+        
+<div class='site-header' role='banner'>
+    <h1>
+        Sass - 备忘录
+    </h1>
+</div>
+<div class="md_content">
+    <div id="sheet_box">
+    <div id="sheet_column" hidden></div>
+    
+
+<h2 id="basics">Basics</h2>
+
+<p>{: .-three-column}</p>
+
+<h3 id="variables">Variables</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#963">$red</span><span style="color:#333">:</span> <span style="color:#058;font-weight:bold">#833</span>;</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">body</span> {
+  <span style="color:#070">color</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">red</span><span style="color:#333">;</span>
+}</code></pre></div>
+<h3 id="nesting">Nesting</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#b06;font-weight:bold">.markdown-body</span> {
+  <span style="color:#070">p</span> {
+    <span style="color:#070">color</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">blue</span><span style="color:#333">;</span>
+  }
+
+  <span style="color:#080;font-weight:bold">&amp;</span><span style="color:#555;font-weight:bold">:hover</span> {
+    <span style="color:#070">color</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">red</span><span style="color:#333">;</span>
+  }
+}</code></pre></div>
+<h3 id="comments">Comments</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#888">/* Block comments */</span>
+<span style="color:#333">//</span> <span style="color:#070">Line</span> <span style="color:#070">comments</span></code></pre></div>
+<h3 id="mixins">Mixins</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#080;font-weight:bold">@mixin</span><span style="color:#06b;font-weight:bold"> heading-font</span> {
+  <span style="color:#070">font-family</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">sans-serif</span><span style="color:#333">;</span>
+  <span style="color:#070">font-weight</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">bold</span><span style="color:#333">;</span>
+}</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">h1</span> {
+  <span style="color:#080;font-weight:bold">@include</span><span style="color:#555;font-weight:bold"> heading-font</span>;
+}</code></pre></div>
+<h4 id="with-parameters">with parameters</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#080;font-weight:bold">@mixin</span><span style="color:#06b;font-weight:bold"> font-size</span>(<span style="color:#963">$n</span>) {
+  <span style="color:#070">font-size</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">n</span> <span style="color:#333">*</span> <span style="color:#070">1</span><span style="color:#b06;font-weight:bold">.2em</span><span style="color:#333">;</span>
+}</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">body</span> {
+  <span style="color:#080;font-weight:bold">@include</span><span style="color:#555;font-weight:bold"> font-size</span>(<span style="color:#00d;font-weight:bold">2</span>);
+}</code></pre></div>
+<h4 id="with-default-values">with default values</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#080;font-weight:bold">@mixin</span><span style="color:#06b;font-weight:bold"> pad</span>(<span style="color:#963">$n</span><span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">10</span><span style="color:#339;font-weight:bold">px</span>) {
+  <span style="color:#070">padding</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">n</span><span style="color:#333">;</span>
+}</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">body</span> {
+  <span style="color:#080;font-weight:bold">@include</span><span style="color:#555;font-weight:bold"> pad</span>(<span style="color:#00d;font-weight:bold">15</span><span style="color:#339;font-weight:bold">px</span>);
+}</code></pre></div>
+<h4 id="with-a-default-variable">with a default variable</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#888">// Set a default value
+</span><span style="color:#888"></span><span style="color:#963">$default-padding</span><span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">10</span><span style="color:#339;font-weight:bold">px</span>;</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#080;font-weight:bold">@mixin</span><span style="color:#06b;font-weight:bold"> pad</span>(<span style="color:#963">$n</span><span style="color:#333">:</span> <span style="color:#963">$default-padding</span>) {
+  <span style="color:#070">padding</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">n</span><span style="color:#333">;</span>
+}</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">body</span> {
+  <span style="color:#080;font-weight:bold">@include</span><span style="color:#555;font-weight:bold"> pad</span>(<span style="color:#00d;font-weight:bold">15</span><span style="color:#339;font-weight:bold">px</span>);
+}</code></pre></div>
+<h3 id="extend">Extend</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#b06;font-weight:bold">.button</span> {
+  <span style="color:#f00;background-color:#faa">···</span>
+}</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#b06;font-weight:bold">.push-button</span> {
+  <span style="color:#080;font-weight:bold">@extend</span> <span style="color:#b06;font-weight:bold">.button</span><span style="color:#333">;</span>
+}</code></pre></div>
+<h3 id="composing">Composing</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#080;font-weight:bold">@import</span> <span style="background-color:#fff0f0">&#39;</span><span style="background-color:#fff0f0">./other_sass_file`;</span></code></pre></div>
+<p>The <code>.scss</code> or <code>.sass</code> extension is optional.</p>
+
+<h2 id="color-functions">Color functions</h2>
+
+<h3 id="rgba">rgba</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">rgb</span><span style="color:#333">(</span><span style="color:#070">100</span><span style="color:#333">,</span> <span style="color:#070">120</span><span style="color:#333">,</span> <span style="color:#070">140</span><span style="color:#333">)</span>
+<span style="color:#070">rgba</span><span style="color:#333">(</span><span style="color:#070">100</span><span style="color:#333">,</span> <span style="color:#070">120</span><span style="color:#333">,</span> <span style="color:#070">140</span><span style="color:#333">,</span> <span style="color:#b06;font-weight:bold">.5</span><span style="color:#333">)</span>
+<span style="color:#070">rgba</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#b06;font-weight:bold">.5</span><span style="color:#333">)</span></code></pre></div>
+<h3 id="mixing">Mixing</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">mix</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">a</span><span style="color:#333">,</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">b</span><span style="color:#333">,</span> <span style="color:#070">10</span><span style="color:#f00;background-color:#faa">%</span><span style="color:#333">)</span>   <span style="color:#333">//</span> <span style="color:#070">10</span><span style="color:#f00;background-color:#faa">%</span> <span style="color:#070">a</span><span style="color:#333">,</span> <span style="color:#070">90</span><span style="color:#f00;background-color:#faa">%</span> <span style="color:#070">b</span></code></pre></div>
+<h3 id="modifying-hsla">Modifying HSLA</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">darken</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#070">5</span><span style="color:#f00;background-color:#faa">%</span><span style="color:#333">)</span>
+<span style="color:#070">lighten</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#070">5</span><span style="color:#f00;background-color:#faa">%</span><span style="color:#333">)</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">saturate</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#070">5</span><span style="color:#f00;background-color:#faa">%</span><span style="color:#333">)</span>
+<span style="color:#070">desaturate</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#070">5</span><span style="color:#f00;background-color:#faa">%</span><span style="color:#333">)</span>
+<span style="color:#070">grayscale</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">)</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">adjust-hue</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#070">15deg</span><span style="color:#333">)</span>
+<span style="color:#070">complement</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">)</span>    <span style="color:#333">//</span> <span style="color:#070">like</span> <span style="color:#070">adjust-hue</span><span style="color:#333">(</span><span style="color:#070">_</span><span style="color:#333">,</span> <span style="color:#070">180deg</span><span style="color:#333">)</span>
+<span style="color:#070">invert</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">)</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">fade-in</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#b06;font-weight:bold">.5</span><span style="color:#333">)</span>   <span style="color:#333">//</span> <span style="color:#070">aka</span> <span style="color:#070">opacify</span><span style="color:#333">()</span>
+<span style="color:#070">fade-out</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#b06;font-weight:bold">.5</span><span style="color:#333">)</span>  <span style="color:#333">//</span> <span style="color:#070">aka</span> <span style="color:#070">transparentize</span><span style="color:#333">()</span> <span style="color:#070">-</span> <span style="color:#070">halves</span> <span style="color:#070">the</span> <span style="color:#070">opacity</span>
+<span style="color:#070">rgba</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#b06;font-weight:bold">.5</span><span style="color:#333">)</span>      <span style="color:#333">//</span> <span style="color:#070">sets</span> <span style="color:#070">alpha</span> <span style="color:#070">to</span> <span style="color:#b06;font-weight:bold">.5</span></code></pre></div>
+<h3 id="getting-individual-values">Getting individual values</h3>
+
+<h4 id="hsla">HSLA</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">hue</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">)</span>         <span style="color:#333">//</span> <span style="color:#f00;background-color:#faa">→</span> <span style="color:#070">0deg</span><span style="color:#b06;font-weight:bold">..360deg</span>
+<span style="color:#070">saturation</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">)</span>  <span style="color:#333">//</span> <span style="color:#f00;background-color:#faa">→</span> <span style="color:#070">0</span><span style="color:#f00;background-color:#faa">%</span><span style="color:#b06;font-weight:bold">..100</span><span style="color:#f00;background-color:#faa">%</span>
+<span style="color:#070">lightness</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">)</span>   <span style="color:#333">//</span> <span style="color:#f00;background-color:#faa">→</span> <span style="color:#070">0</span><span style="color:#f00;background-color:#faa">%</span><span style="color:#b06;font-weight:bold">..100</span><span style="color:#f00;background-color:#faa">%</span>
+<span style="color:#070">alpha</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">)</span>       <span style="color:#333">//</span> <span style="color:#f00;background-color:#faa">→</span> <span style="color:#070">0</span><span style="color:#b06;font-weight:bold">..1</span> <span style="color:#333">(</span><span style="color:#070">aka</span> <span style="color:#070">opacity</span><span style="color:#333">())</span></code></pre></div>
+<h4 id="rgb">RGB</h4>
+
+<pre><code>red($color)         // → 0..255
+green($color)
+blue($color)
+</code></pre>
+
+<p>See: <a href="http://sass-lang.com/documentation/Sass/Script/Functions.html#hue-instance_method">hue()</a>, <a href="http://sass-lang.com/documentation/Sass/Script/Functions.html#red-instance_method">red()</a></p>
+
+<h3 id="adjustments">Adjustments</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#888">// Changes by fixed amounts
+</span><span style="color:#888"></span><span style="color:#070">adjust-color</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">blue</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">5</span><span style="color:#333">)</span>
+<span style="color:#070">adjust-color</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">lightness</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">-30</span><span style="color:#f00;background-color:#faa">%</span><span style="color:#333">)</span>   <span style="color:#333">//</span> <span style="color:#070">like</span> <span style="color:#070">darken</span><span style="color:#333">(</span><span style="color:#070">_</span><span style="color:#333">,</span> <span style="color:#070">30</span><span style="color:#f00;background-color:#faa">%</span><span style="color:#333">)</span>
+<span style="color:#070">adjust-color</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">alpha</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">-0</span><span style="color:#b06;font-weight:bold">.4</span><span style="color:#333">)</span>       <span style="color:#333">//</span> <span style="color:#070">like</span> <span style="color:#070">fade-out</span><span style="color:#333">(</span><span style="color:#070">_</span><span style="color:#333">,</span> <span style="color:#b06;font-weight:bold">.4</span><span style="color:#333">)</span>
+<span style="color:#070">adjust-color</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">hue</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">30deg</span><span style="color:#333">)</span>        <span style="color:#333">//</span> <span style="color:#070">like</span> <span style="color:#070">adjust-hue</span><span style="color:#333">(</span><span style="color:#070">_</span><span style="color:#333">,</span> <span style="color:#070">15deg</span><span style="color:#333">)</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#888">// Changes via percentage
+</span><span style="color:#888"></span><span style="color:#070">scale-color</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">lightness</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">50</span><span style="color:#f00;background-color:#faa">%</span><span style="color:#333">)</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#888">// Changes one property completely
+</span><span style="color:#888"></span><span style="color:#070">change-color</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">hue</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">180deg</span><span style="color:#333">)</span>
+<span style="color:#070">change-color</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">color</span><span style="color:#333">,</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">blue</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">250</span><span style="color:#333">)</span></code></pre></div>
+<p>Supported: <code>$red</code> <code>$green</code> <code>$blue</code> <code>$hue</code> <code>$saturation</code> <code>$lightness</code> <code>$alpha</code></p>
+
+<h2 id="other-functions">Other functions</h2>
+
+<h3 id="strings">Strings</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">unquote</span><span style="color:#333">(</span><span style="background-color:#fff0f0">&#39;</span><span style="background-color:#fff0f0">hello&#39;</span><span style="color:#333">)</span>
+<span style="color:#070">quote</span><span style="color:#333">(</span><span style="color:#070">hello</span><span style="color:#333">)</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">to-upper-case</span><span style="color:#333">(</span><span style="color:#070">hello</span><span style="color:#333">)</span>
+<span style="color:#070">to-lower-case</span><span style="color:#333">(</span><span style="color:#070">hello</span><span style="color:#333">)</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">str-length</span><span style="color:#333">(</span><span style="color:#070">hello</span> <span style="color:#070">world</span><span style="color:#333">)</span>
+<span style="color:#070">str-slice</span><span style="color:#333">(</span><span style="color:#070">hello</span><span style="color:#333">,</span> <span style="color:#070">2</span><span style="color:#333">,</span> <span style="color:#070">5</span><span style="color:#333">)</span>      <span style="color:#333">//</span> <span style="background-color:#fff0f0">&#34;ello&#34;</span> <span style="color:#070">-</span> <span style="color:#070">it</span><span style="background-color:#fff0f0">&#39;</span><span style="background-color:#fff0f0">s 1-based, not 0-based</span><span style="color:#f00;background-color:#faa">
+</span><span style="color:#f00;background-color:#faa"></span><span style="background-color:#fff0f0">str-insert(&#34;abcd&#34;, &#34;X&#34;, 1)  // &#34;Xabcd&#34;</span></code></pre></div>
+<h3 id="units">Units</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">unit</span><span style="color:#333">(</span><span style="color:#070">3em</span><span style="color:#333">)</span>        <span style="color:#333">//</span> <span style="background-color:#fff0f0">&#39;</span><span style="background-color:#fff0f0">em&#39;</span>
+<span style="color:#070">unitless</span><span style="color:#333">(</span><span style="color:#070">100px</span><span style="color:#333">)</span>  <span style="color:#333">//</span> <span style="color:#070">false</span></code></pre></div>
+<h3 id="numbers">Numbers</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">floor</span><span style="color:#333">(</span><span style="color:#070">3</span><span style="color:#b06;font-weight:bold">.5</span><span style="color:#333">)</span>
+<span style="color:#070">ceil</span><span style="color:#333">(</span><span style="color:#070">3</span><span style="color:#b06;font-weight:bold">.5</span><span style="color:#333">)</span>
+<span style="color:#070">round</span><span style="color:#333">(</span><span style="color:#070">3</span><span style="color:#b06;font-weight:bold">.5</span><span style="color:#333">)</span>
+<span style="color:#070">abs</span><span style="color:#333">(</span><span style="color:#070">3</span><span style="color:#b06;font-weight:bold">.5</span><span style="color:#333">)</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">min</span><span style="color:#333">(</span><span style="color:#070">1</span><span style="color:#333">,</span> <span style="color:#070">2</span><span style="color:#333">,</span> <span style="color:#070">3</span><span style="color:#333">)</span>
+<span style="color:#070">max</span><span style="color:#333">(</span><span style="color:#070">1</span><span style="color:#333">,</span> <span style="color:#070">2</span><span style="color:#333">,</span> <span style="color:#070">3</span><span style="color:#333">)</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">percentage</span><span style="color:#333">(</span><span style="color:#b06;font-weight:bold">.5</span><span style="color:#333">)</span>   <span style="color:#333">//</span> <span style="color:#070">50</span><span style="color:#f00;background-color:#faa">%</span>
+<span style="color:#070">random</span><span style="color:#333">(</span><span style="color:#070">3</span><span style="color:#333">)</span>        <span style="color:#333">//</span> <span style="color:#070">0</span><span style="color:#b06;font-weight:bold">..3</span></code></pre></div>
+<h3 id="misc">Misc</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">variable-exists</span><span style="color:#333">(</span><span style="color:#070">red</span><span style="color:#333">)</span>    <span style="color:#333">//</span> <span style="color:#070">checks</span> <span style="color:#070">for</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">red</span>
+<span style="color:#070">mixin-exists</span><span style="color:#333">(</span><span style="color:#070">red-text</span><span style="color:#333">)</span>  <span style="color:#333">//</span> <span style="color:#070">checks</span> <span style="color:#070">for</span> <span style="color:#333">@</span><span style="color:#070">mixin</span> <span style="color:#070">red-text</span>
+<span style="color:#070">function-exists</span><span style="color:#333">(</span><span style="color:#070">redify</span><span style="color:#333">)</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">global-variable-exists</span><span style="color:#333">(</span><span style="color:#070">red</span><span style="color:#333">)</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">selector-append</span><span style="color:#333">(</span><span style="background-color:#fff0f0">&#39;</span><span style="background-color:#fff0f0">.menu&#39;</span><span style="color:#333">,</span> <span style="background-color:#fff0f0">&#39;</span><span style="background-color:#fff0f0">li&#39;</span><span style="color:#333">,</span> <span style="background-color:#fff0f0">&#39;</span><span style="background-color:#fff0f0">a&#39;</span><span style="color:#333">)</span>   <span style="color:#333">//</span> <span style="color:#b06;font-weight:bold">.menu</span> <span style="color:#070">li</span> <span style="color:#070">a</span>
+<span style="color:#070">selector-nest</span><span style="color:#333">(</span><span style="background-color:#fff0f0">&#39;</span><span style="background-color:#fff0f0">.menu&#39;</span><span style="color:#333">,</span> <span style="background-color:#fff0f0">&#39;</span><span style="background-color:#fff0f0">&amp;:hover li&#39;</span><span style="color:#333">)</span>  <span style="color:#333">//</span> <span style="color:#b06;font-weight:bold">.menu</span><span style="color:#555;font-weight:bold">:hover</span> <span style="color:#070">li</span>
+<span style="color:#070">selector-extend</span><span style="color:#333">(</span><span style="color:#b06;font-weight:bold">...</span><span style="color:#333">)</span>
+<span style="color:#070">selector-parse</span><span style="color:#333">(</span><span style="color:#b06;font-weight:bold">...</span><span style="color:#333">)</span>
+<span style="color:#070">selector-replace</span><span style="color:#333">(</span><span style="color:#b06;font-weight:bold">...</span><span style="color:#333">)</span>
+<span style="color:#070">selector-unify</span><span style="color:#333">(</span><span style="color:#b06;font-weight:bold">...</span><span style="color:#333">)</span></code></pre></div>
+<h2 id="feature-checks">Feature checks</h2>
+
+<h3 id="feature-check">Feature check</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#070">feature-exists</span><span style="color:#333">(</span><span style="color:#070">global-variable-shadowing</span><span style="color:#333">)</span></code></pre></div>
+<h3 id="features">Features</h3>
+
+<ul>
+<li>global-variable-shadowing</li>
+<li>extend-selector-pseudoclass</li>
+<li>units-level-3</li>
+<li>at-error</li>
+</ul>
+
+<h2 id="loops">Loops</h2>
+
+<h3 id="for-loops">For loops</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#080;font-weight:bold">@for</span> <span style="color:#963">$i</span> <span style="color:#000;font-weight:bold">from</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#000;font-weight:bold">through</span> <span style="color:#00d;font-weight:bold">4</span> {
+  <span style="color:#b06;font-weight:bold">.item-</span><span style="background-color:#eee">#{</span><span style="color:#963">$i</span><span style="background-color:#eee">}</span> { <span style="color:#070">left</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">20px</span> <span style="color:#333">*</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">i</span><span style="color:#333">;</span> }
+}</code></pre></div>
+<h3 id="each-loops-simple">Each loops (simple)</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#963">$menu-items</span><span style="color:#333">:</span> home about services contact;
+
+<span style="color:#080;font-weight:bold">@each</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">item</span> <span style="color:#070">in</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">menu-items</span> {
+  <span style="color:#b06;font-weight:bold">.photo-</span><span style="background-color:#eee">#{</span><span style="color:#963">$item</span><span style="background-color:#eee">}</span> {
+    <span style="color:#070">background</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">url</span><span style="color:#333">(</span><span style="background-color:#fff0f0">&#39;</span><span style="background-color:#fff0f0">images/</span><span style="background-color:#eee">#{</span><span style="color:#963">$item</span><span style="background-color:#eee">}</span><span style="background-color:#fff0f0">.jpg&#39;</span><span style="color:#333">);</span>
+  }
+}</code></pre></div>
+<h3 id="each-loops-nested">Each loops (nested)</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#963">$backgrounds</span><span style="color:#333">:</span> (home<span style="color:#333">,</span> <span style="background-color:#fff0f0">&#39;</span><span style="background-color:#fff0f0">home.jpg&#39;</span>)<span style="color:#333">,</span> (about<span style="color:#333">,</span> <span style="background-color:#fff0f0">&#39;</span><span style="background-color:#fff0f0">about.jpg&#39;</span>);
+
+<span style="color:#080;font-weight:bold">@each</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">id</span><span style="color:#333">,</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">image</span> <span style="color:#070">in</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">backgrounds</span> {
+  <span style="color:#b06;font-weight:bold">.photo-</span><span style="background-color:#eee">#{</span><span style="color:#963">$id</span><span style="background-color:#eee">}</span> {
+    <span style="color:#070">background</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">url</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">image</span><span style="color:#333">);</span>
+  }
+}</code></pre></div>
+<h3 id="while-loops">While loops</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#963">$i</span><span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">6</span>;
+<span style="color:#080;font-weight:bold">@while</span> <span style="color:#963">$i</span> <span style="color:#333">&gt;</span> <span style="color:#00d;font-weight:bold">0</span> {
+  <span style="color:#b06;font-weight:bold">.item-</span><span style="background-color:#eee">#{</span><span style="color:#963">$i</span><span style="background-color:#eee">}</span> { <span style="color:#070">width</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">2em</span> <span style="color:#333">*</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">i</span><span style="color:#333">;</span> }
+  <span style="color:#963">$i</span><span style="color:#333">:</span> <span style="color:#963">$i</span> <span style="color:#333">-</span> <span style="color:#00d;font-weight:bold">2</span>;
+}</code></pre></div>
+<h2 id="other-features">Other features</h2>
+
+<h3 id="conditionals">Conditionals</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#080;font-weight:bold">@if</span> <span style="color:#963">$position</span> <span style="color:#333">==</span> <span style="background-color:#fff0f0">&#39;</span><span style="background-color:#fff0f0">left&#39;</span> {
+   <span style="color:#070">position</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">absolute</span><span style="color:#333">;</span>
+   <span style="color:#070">left</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">0</span><span style="color:#333">;</span>
+}
+<span style="color:#080;font-weight:bold">@else</span> {
+   <span style="color:#070">position</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#070">static</span><span style="color:#333">;</span>
+}</code></pre></div>
+<h3 id="interpolation">Interpolation</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#b06;font-weight:bold">.</span><span style="background-color:#eee">#{</span><span style="color:#963">$klass</span><span style="background-color:#eee">}</span> { <span style="color:#b06;font-weight:bold">...</span> }      <span style="color:#888">// Class
+</span><span style="color:#888"></span><span style="color:#070">call</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">function-name</span><span style="color:#333">)</span>    <span style="color:#333">//</span> <span style="color:#070">Functions</span>
+
+<span style="color:#333">@</span><span style="color:#070">media</span> <span style="color:#0e84b5;font-weight:bold">#</span>{<span style="color:#f00;background-color:#faa">$</span><span style="color:#070">tablet</span>}
+<span style="color:#070">font</span><span style="color:#555;font-weight:bold">:</span> <span style="color:#0e84b5;font-weight:bold">#</span>{<span style="color:#f00;background-color:#faa">$</span><span style="color:#070">size</span>}<span style="color:#333">/</span><span style="color:#0e84b5;font-weight:bold">#</span>{<span style="color:#f00;background-color:#faa">$</span><span style="color:#070">line-height</span>}
+<span style="color:#070">url</span><span style="color:#333">(</span><span style="background-color:#fff0f0">&#34;</span><span style="background-color:#eee">#{</span><span style="color:#963">$background</span><span style="background-color:#eee">}</span><span style="background-color:#fff0f0">.jpg&#34;</span><span style="color:#333">)</span></code></pre></div>
+<h3 id="lists">Lists</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#963">$list</span><span style="color:#333">:</span> (a b c);
+
+<span style="color:#070">nth</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">list</span><span style="color:#333">,</span> <span style="color:#070">1</span><span style="color:#333">)</span>  <span style="color:#333">//</span> <span style="color:#070">starts</span> <span style="color:#070">with</span> <span style="color:#070">1</span>
+<span style="color:#070">length</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">list</span><span style="color:#333">)</span>
+
+<span style="color:#333">@</span><span style="color:#070">each</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">item</span> <span style="color:#070">in</span> <span style="color:#f00;background-color:#faa">$</span><span style="color:#070">list</span> { <span style="color:#b06;font-weight:bold">...</span> }</code></pre></div>
+<h3 id="maps">Maps</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss"><span style="color:#963">$map</span><span style="color:#333">:</span> (key1<span style="color:#333">:</span> value1<span style="color:#333">,</span> key2<span style="color:#333">:</span> value2<span style="color:#333">,</span> key3<span style="color:#333">:</span> value3);
+
+<span style="color:#070">map-get</span><span style="color:#333">(</span><span style="color:#f00;background-color:#faa">$</span><span style="color:#070">map</span><span style="color:#333">,</span> <span style="color:#070">key1</span><span style="color:#333">)</span></code></pre></div>
+<h2 id="see-also">See also</h2>
+
+<p>{: .-one-column}</p>
+
+<ul>
+<li><a href="http://sass-lang.com/documentation/Sass/Script/Functions.html">http://sass-lang.com/documentation/Sass/Script/Functions.html</a></li>
+<li><a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#sassscript">http://sass-lang.com/documentation/file.SASS_REFERENCE.html#sassscript</a></li>
+</ul>
+
+
+    <script>
+        let colNum = document.querySelector("#sheet_column").innerText;
+        const sheetBox = document.body.querySelector("#sheet_box");
+        let eleList = [];
+        Array.prototype.max = function () {
+            return Math.max.apply(null, this);
+        };
+
+        for (let key in sheetBox.children) {
+            eleList.push(sheetBox.children[key]);
+        }
+        let _section, _wrap, _x = 0,
+            _y = 0;
+        eleList.forEach(ele => {
+            if (ele.localName === "h2") {
+                _section = document.createElement("div");
+                _wrap = document.createElement("div");
+                _wrap.className = "h3_wrap";
+                _section.className = "h2_section";
+                _section.appendChild(ele);
+                sheetBox.appendChild(_section);
+                sheetBox.appendChild(_wrap);
+                _x = 0;
+                _y = 0;
+            }
+            if (ele.localName === "h3") {
+                _section = document.createElement("div");
+                _section.className = "h3_section";
+                if (!_wrap) {
+                    _wrap = document.createElement("div");
+                    _wrap.className = "h3_wrap";
+                }
+                if (colNum === "2") {
+                    _section.style.width = "49.4%";
+                } else {
+                    _section.style.width = "32.8%";
+                }
+                _section.appendChild(ele);
+                _wrap.appendChild(_section);
+            }
+            if (_section && ele.localName && ele.localName !== "script") {
+                _section.appendChild(ele);
+            }
+        });
+
+        function layout(col, _onlyChangeWidth) {
+            let _w = sheetBox.offsetWidth;
+            const _tars = sheetBox.querySelectorAll(".h3_wrap");
+            let _e_offset = _w * 1.012 / col;
+
+            _tars.forEach(t => {
+                let _hs = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+                let es = [];
+                let _h3_wrap_height = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+                for (let key in t.children) {
+                    if (t.children[key].localName) {
+                        es.push(t.children[key]);
+                    }
+                }
+                es.forEach((e, i) => {
+                    let _colOrder = i % col;
+                    e.style.left = _colOrder * _e_offset + 'px';
+                    e.style.top = _hs[_colOrder] + 'px';
+                    e.style.width = (_w - (col - 1) * _w * 0.012) / col + 'px';
+                    _hs[_colOrder] += e.offsetHeight + 8;
+                    _h3_wrap_height[_colOrder] += e.offsetHeight + 8;
+
+                })
+                t.style.height = _h3_wrap_height.max() + 'px';
+            })
+        }
+
+        colNum = Number(colNum) ? Number(colNum) : 3;
+        let _colCounter;
+        if (window.innerWidth > 768) {
+            _colCounter = colNum;
+        } else if (window.innerWidth > 480) {
+            _colCounter = colNum - 1 <= 0 ? colNum : colNum - 1;
+        } else {
+            _colCounter = colNum - 2 <= 0 ? colNum - 1 <= 0 ? colNum : colNum - 1 : colNum - 2;
+        }
+        layout(_colCounter);
+        window.onresize = function () {
+            let _cols;
+            if (window.innerWidth >= 768) {
+                _cols = colNum;
+            } else if (window.innerWidth > 480) {
+                _cols = colNum - 1 <= 0 ? colNum : colNum - 1;
+            } else {
+                _cols = colNum - 2 <= 0 ? colNum - 1 <= 0 ? colNum : colNum - 1 : colNum - 2;
+            }
+            layout(_cols);
+        }
+    </script>
+</div>
+</div>
+
+    </main>
+
+    <footer>
+        
+        
+        
+    </footer>
+
+</body>
+
+</html>

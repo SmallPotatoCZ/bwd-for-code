@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<link href='/favicon.png' rel='shortcut icon'>
+<meta content='' name='app:pageurl'>
+
+
+
+
+
+
+
+<link rel="canonical" href="">
+<meta name="og:url" content="">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <title>EsilyZhang 的备忘单</title>
+    
+    <link rel="stylesheet" href="/sass/main.min.ecb251ca6e9aa6da8f72a6ffef89852dc728315d3683f24f903bb1d6e525267f.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+
+<link rel="stylesheet" href="/sass/markdown.min.927f665213baf4b2bcce6f05882b082730be68f37fb051ad2dc1666566559b58.css">
+
+</head>
+
+<body>
+    <header role="heading">
+        <nav class='top-nav' data-js-no-preview role='navigation'>
+    <div class='container'>
+        
+        <div class='left'>
+            <a class='back-button icons' href='/'>keyboard_backspace</a>
+        </div>
+        
+
+        <a class='brand' href='/'>
+            EsilyZhang 的备忘单
+        </a>
+    </div>
+</nav>
+    </header>
+    <main role="main">
+        
+<div class='site-header' role='banner'>
+    <h1>
+        adb (Android Debug Bridge) - 备忘录
+    </h1>
+</div>
+<div class="md_content">
+    <div id="sheet_box">
+    <div id="sheet_column" hidden></div>
+    
+
+<h3 id="device-basics">Device Basics</h3>
+
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>adb devices</code></td>
+<td>Lists connected devices</td>
+</tr>
+
+<tr>
+<td><code>adb devices -l</code></td>
+<td>Lists connected devices and kind</td>
+</tr>
+
+<tr>
+<td>&mdash;</td>
+<td>&mdash;</td>
+</tr>
+
+<tr>
+<td><code>adb root</code></td>
+<td>Restarts adbd with root permissions</td>
+</tr>
+
+<tr>
+<td><code>adb start-server</code></td>
+<td>Starts the adb server</td>
+</tr>
+
+<tr>
+<td><code>adb kill-server</code></td>
+<td>Kills the adb server</td>
+</tr>
+
+<tr>
+<td><code>adb remount</code></td>
+<td>Remounts file system with read/write access</td>
+</tr>
+
+<tr>
+<td><code>adb reboot</code></td>
+<td>Reboots the device</td>
+</tr>
+
+<tr>
+<td><code>adb reboot bootloader</code></td>
+<td>Reboots the device into fastboot</td>
+</tr>
+
+<tr>
+<td><code>adb disable-verity</code></td>
+<td>Reboots the device into fastboot</td>
+</tr>
+</tbody>
+</table>
+
+<p><code>wait-for-device</code> can be specified after <code>adb</code> to ensure that the command will run once the device is connected.</p>
+
+<p><code>-s</code> can be used to send the commands to a specific device when multiple are connected.</p>
+
+<h4 id="examples">Examples</h4>
+
+<pre><code>$ adb wait-for-device devices
+ List of devices attached
+ somedevice-1234 device
+ someotherdevice-1234 device
+</code></pre>
+
+<pre><code>$ adb -s somedevice-1234 root
+</code></pre>
+
+<h3 id="logcat">Logcat</h3>
+
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>adb logcat</code></td>
+<td>Starts printing log messages to stdout</td>
+</tr>
+
+<tr>
+<td><code>adb logcat -g</code></td>
+<td>Displays current log buffer sizes</td>
+</tr>
+
+<tr>
+<td><code>adb logcat -G &lt;size&gt;</code></td>
+<td>Sets the buffer size (K or M)</td>
+</tr>
+
+<tr>
+<td><code>adb logcat -c</code></td>
+<td>Clears the log buffers</td>
+</tr>
+
+<tr>
+<td><code>adb logcat *:V</code></td>
+<td>Enables ALL log messages (verbose)</td>
+</tr>
+
+<tr>
+<td><code>adb logcat -f &lt;filename&gt;</code></td>
+<td>Dumps to specified file</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="examples-1">Examples</h4>
+
+<pre><code>$ adb logcat -G 16M
+$ adb logcat *:V &gt; output.log
+</code></pre>
+
+<h3 id="file-management">File Management</h3>
+
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>adb push &lt;local&gt; &lt;remote&gt;</code></td>
+<td>Copies the local to the device at remote</td>
+</tr>
+
+<tr>
+<td><code>adb pull &lt;remote&gt; &lt;local&gt;</code></td>
+<td>Copies the remote from the device to local</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="examples-2">Examples</h4>
+
+<pre><code>$ echo &quot;This is a test&quot; &gt; test.txt
+$ adb push  test.txt /sdcard/test.txt
+$ adb pull /sdcard/test.txt pulledTest.txt
+</code></pre>
+
+<h3 id="remote-shell">Remote Shell</h3>
+
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>adb shell &lt;command&gt;</code></td>
+<td>Runs the specified command on device (most unix commands work here)</td>
+</tr>
+
+<tr>
+<td><code>adb shell wm size</code></td>
+<td>Displays the current screen resolution</td>
+</tr>
+
+<tr>
+<td><code>adb shell wm size WxH</code></td>
+<td>Sets the resolution to WxH</td>
+</tr>
+
+<tr>
+<td><code>adb shell pm list packages</code></td>
+<td>Lists all installed packages</td>
+</tr>
+
+<tr>
+<td><code>adb shell pm list packages -3</code></td>
+<td>Lists all installed 3rd-party packages</td>
+</tr>
+
+<tr>
+<td><code>adb shell monkey -p app.package.name</code></td>
+<td>Starts the specified package</td>
+</tr>
+</tbody>
+</table>
+
+
+    <script>
+        let colNum = document.querySelector("#sheet_column").innerText;
+        const sheetBox = document.body.querySelector("#sheet_box");
+        let eleList = [];
+        Array.prototype.max = function () {
+            return Math.max.apply(null, this);
+        };
+
+        for (let key in sheetBox.children) {
+            eleList.push(sheetBox.children[key]);
+        }
+        let _section, _wrap, _x = 0,
+            _y = 0;
+        eleList.forEach(ele => {
+            if (ele.localName === "h2") {
+                _section = document.createElement("div");
+                _wrap = document.createElement("div");
+                _wrap.className = "h3_wrap";
+                _section.className = "h2_section";
+                _section.appendChild(ele);
+                sheetBox.appendChild(_section);
+                sheetBox.appendChild(_wrap);
+                _x = 0;
+                _y = 0;
+            }
+            if (ele.localName === "h3") {
+                _section = document.createElement("div");
+                _section.className = "h3_section";
+                if (!_wrap) {
+                    _wrap = document.createElement("div");
+                    _wrap.className = "h3_wrap";
+                }
+                if (colNum === "2") {
+                    _section.style.width = "49.4%";
+                } else {
+                    _section.style.width = "32.8%";
+                }
+                _section.appendChild(ele);
+                _wrap.appendChild(_section);
+            }
+            if (_section && ele.localName && ele.localName !== "script") {
+                _section.appendChild(ele);
+            }
+        });
+
+        function layout(col, _onlyChangeWidth) {
+            let _w = sheetBox.offsetWidth;
+            const _tars = sheetBox.querySelectorAll(".h3_wrap");
+            let _e_offset = _w * 1.012 / col;
+
+            _tars.forEach(t => {
+                let _hs = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+                let es = [];
+                let _h3_wrap_height = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+                for (let key in t.children) {
+                    if (t.children[key].localName) {
+                        es.push(t.children[key]);
+                    }
+                }
+                es.forEach((e, i) => {
+                    let _colOrder = i % col;
+                    e.style.left = _colOrder * _e_offset + 'px';
+                    e.style.top = _hs[_colOrder] + 'px';
+                    e.style.width = (_w - (col - 1) * _w * 0.012) / col + 'px';
+                    _hs[_colOrder] += e.offsetHeight + 8;
+                    _h3_wrap_height[_colOrder] += e.offsetHeight + 8;
+
+                })
+                t.style.height = _h3_wrap_height.max() + 'px';
+            })
+        }
+
+        colNum = Number(colNum) ? Number(colNum) : 3;
+        let _colCounter;
+        if (window.innerWidth > 768) {
+            _colCounter = colNum;
+        } else if (window.innerWidth > 480) {
+            _colCounter = colNum - 1 <= 0 ? colNum : colNum - 1;
+        } else {
+            _colCounter = colNum - 2 <= 0 ? colNum - 1 <= 0 ? colNum : colNum - 1 : colNum - 2;
+        }
+        layout(_colCounter);
+        window.onresize = function () {
+            let _cols;
+            if (window.innerWidth >= 768) {
+                _cols = colNum;
+            } else if (window.innerWidth > 480) {
+                _cols = colNum - 1 <= 0 ? colNum : colNum - 1;
+            } else {
+                _cols = colNum - 2 <= 0 ? colNum - 1 <= 0 ? colNum : colNum - 1 : colNum - 2;
+            }
+            layout(_cols);
+        }
+    </script>
+</div>
+</div>
+
+    </main>
+
+    <footer>
+        
+        
+        
+    </footer>
+
+</body>
+
+</html>

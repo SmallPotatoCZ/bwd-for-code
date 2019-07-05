@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Apps on EsilyZhang 的备忘单</title>
+    <link>https://bwd.zhangchao.online/categories/apps/</link>
+    <description>Recent content in Apps on EsilyZhang 的备忘单</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	<atom:link href="https://bwd.zhangchao.online/categories/apps/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Visual Studio Code</title>
+      <link>https://bwd.zhangchao.online/apps/vscode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bwd.zhangchao.online/apps/vscode/</guid>
+      <description>Shortcuts Command palette    Key Description     ⇧⌘P Show all commands   ⇧⌘P Show all commands   ⌘P Show files    Sidebars    Key Description     ⌘B Toggle sidebar   ⇧⌘E Explorer   ⇧⌘F Search   ⇧⌘D Debug   ⇧⌘X Extensions   ⇧^G Git (SCM)    Search    Key Description     ⌘F Find   ⌥⌘F Replace   ⇧⌘F Find in files   ⇧⌘H Replace in files    Panel    Key Description     ⌘J Toggle panel   ⇧⌘M Problems   ⇧⌘U Output   ⇧⌘Y Debug console   ^` Terminal    View    Key Description     ⌘k z Zen mode   ⌘k u Close unmodified   ⌘k w Close all    Debug    Key Description     F5 Start   ⇧F5 Stop   ⇧⌘F5 Restart   ^F5 Start without debugging   F9 Toggle breakpoint   F10 Step over   F11 Step into   ⇧F11 Step out   ⇧⌘D Debug sidebar   ⇧⌘Y Debug panel    References  Keyboard shortcuts (MacOS) (code.</description>
+    </item>
+    
+  </channel>
+</rss>
