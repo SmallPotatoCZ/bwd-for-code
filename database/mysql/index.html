@@ -58,13 +58,60 @@
         
 <div class='site-header' role='banner'>
     <h1>
-        CLI - 备忘录
+        sql 常用语句 - 备忘录
     </h1>
 </div>
 <div class="md_content">
     <div id="sheet_box">
-    <div id="sheet_column" hidden></div>
+    <div id="sheet_column" hidden>2</div>
     
+
+<h2 id="简单的-sql-查询">简单的 SQL 查询</h2>
+
+<h3 id="数据库">数据库</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">// 查看所有数据库
+show databses;
+// 进入数据库
+use <span style="color:#963">$databasename</span>;</code></pre></div>
+<h3 id="数据库中的表">数据库中的表</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">// 查看数据库中表的列表
+show tables;
+
+// 查看指定表格的内容
+<span style="color:#080;font-weight:bold">select</span> * from <span style="color:#963">$tablename</span>;
+
+// 只显示指定列的数据
+<span style="color:#080;font-weight:bold">select</span> <span style="color:#963">$name</span> from <span style="color:#963">$tablename</span>;
+// 显示多列的数据
+<span style="color:#080;font-weight:bold">select</span> <span style="color:#963">$name1</span>,<span style="color:#963">$name2</span> from <span style="color:#963">$tablename</span>;
+// 限制显示数据
+<span style="color:#080;font-weight:bold">select</span> * from <span style="color:#963">$tablename</span> limit <span style="color:#963">$num</span>;
+// 通过指定字符串过滤结果,% 是通配符（左右）
+<span style="color:#080;font-weight:bold">select</span> * from <span style="color:#963">$tablename</span> where <span style="color:#963">$name</span> like <span style="color:#963">$string</span>%;</code></pre></div>
+<h2 id="sql-进阶">Sql 进阶</h2>
+
+<h3 id="查询">查询</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">// 根据给定字符串，过滤结果
+<span style="color:#080;font-weight:bold">select</span> * from <span style="color:#963">$tablename</span> where <span style="color:#963">$name</span> like <span style="background-color:#fff0f0">&#34;%mike%&#34;</span>;
+// 严格模式
+<span style="color:#080;font-weight:bold">select</span> * from <span style="color:#963">$tablename</span> where <span style="color:#963">$name</span><span style="color:#333">=</span><span style="background-color:#fff0f0">&#34;</span><span style="color:#963">$string</span><span style="background-color:#fff0f0">&#34;</span>;
+// 根据范围查询
+<span style="color:#080;font-weight:bold">select</span> * from <span style="color:#963">$tablename</span> where <span style="color:#963">$name</span> between <span style="color:#963">$start</span> and <span style="color:#963">$end</span>;
+// 排序
+<span style="color:#080;font-weight:bold">select</span> * from <span style="color:#963">$tablename</span> order by <span style="color:#963">$name</span>;
+// 降序
+<span style="color:#080;font-weight:bold">select</span> * from <span style="color:#963">$tablename</span> order by <span style="color:#963">$name</span> DESC;
+// 组合
+<span style="color:#080;font-weight:bold">select</span> * from <span style="color:#963">$tablename</span> order by <span style="color:#963">$name</span> DESC limit <span style="color:#963">$num</span>;
+// 根表1中的某个值和对应的表2中的某个值，查询结果
+<span style="color:#080;font-weight:bold">select</span> * from <span style="color:#963">$tablename1</span> join <span style="color:#963">$tablename2</span> on <span style="color:#963">$tablename1</span>.<span style="color:#963">$name</span><span style="color:#333">=</span><span style="color:#963">$tablename2</span>.<span style="color:#963">$name</span>;</code></pre></div>
+<h3 id="参考文档">参考文档</h3>
+
+<ol>
+<li><a href="https://app.bytescout.com/sql-trainer/index.html">ByteScout SQL Trainer</a></li>
+<li><a href="https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-connections.html">MySql v8 官方文档</a></li>
+</ol>
+
 
     <script>
         let colNum = document.querySelector("#sheet_column").innerText;

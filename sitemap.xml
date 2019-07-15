@@ -7,6 +7,47 @@
   </url>
   
   <url>
+    <loc>https://bwd.zhangchao.online/categories/</loc>
+    <lastmod>2019-07-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/</loc>
+    <lastmod>2019-07-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/categories/javascript/</loc>
+    <lastmod>2019-07-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/javascript/basic/</loc>
+    <lastmod>2019-07-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/javascript/</loc>
+    <lastmod>2019-07-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/tags/</loc>
+    <lastmod>2019-07-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/tags/featured/</loc>
+    <lastmod>2019-07-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://bwd.zhangchao.online/categories/apps/</loc>
     <priority>0</priority>
   </url>
@@ -27,11 +68,6 @@
   </url>
   
   <url>
-    <loc>https://bwd.zhangchao.online/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://bwd.zhangchao.online/cli/</loc>
     <priority>0</priority>
   </url>
@@ -42,22 +78,21 @@
   </url>
   
   <url>
+    <loc>https://bwd.zhangchao.online/database/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://bwd.zhangchao.online/javascript/es6/</loc>
   </url>
   
   <url>
-    <loc>https://bwd.zhangchao.online/</loc>
+    <loc>https://bwd.zhangchao.online/interview-question/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://bwd.zhangchao.online/categories/javascript/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://bwd.zhangchao.online/javascript/</loc>
-    <priority>0</priority>
+    <loc>https://bwd.zhangchao.online/interview-question/javascript/</loc>
   </url>
   
   <url>
@@ -65,17 +100,25 @@
   </url>
   
   <url>
-    <loc>https://bwd.zhangchao.online/tags/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://bwd.zhangchao.online/apps/vscode/</loc>
   </url>
   
   <url>
-    <loc>https://bwd.zhangchao.online/tags/featured/</loc>
+    <loc>https://bwd.zhangchao.online/interview-question/web/</loc>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/categories/database/</loc>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/categories/interview_question/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bwd.zhangchao.online/database/mysql/</loc>
   </url>
   
 </urlset>

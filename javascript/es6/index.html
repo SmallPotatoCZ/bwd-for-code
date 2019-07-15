@@ -30,11 +30,11 @@
 
     <title>EsilyZhang 的备忘单</title>
     
-    <link rel="stylesheet" href="/sass/main.min.ecb251ca6e9aa6da8f72a6ffef89852dc728315d3683f24f903bb1d6e525267f.css">
+    <link rel="stylesheet" href="/sass/main.min.97ef104245886f62f208a3f927e5b782e9ca7977a33f55b30e5f46e415c7372b.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
 
-<link rel="stylesheet" href="/sass/markdown.min.927f665213baf4b2bcce6f05882b082730be68f37fb051ad2dc1666566559b58.css">
+<link rel="stylesheet" href="/sass/markdown.min.fab29f2a847a663f96443fcaa4719dab072d38a345a61cd879a9641226c35a75.css">
 
 </head>
 
@@ -66,429 +66,1219 @@
     <div id="sheet_column" hidden>2</div>
     
 
-<h2 id="scope">Scope</h2>
+<h2 id="语法">语法</h2>
 
-<h3 id="block-scoping">Block scoping</h3>
+<h3 id="块作用域声明">块作用域声明</h3>
 
-<h4 id="let">Let</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> fn () {
-  <span style="color:#080;font-weight:bold">let</span> x <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">0</span>
-  <span style="color:#080;font-weight:bold">if</span> (<span style="color:#080;font-weight:bold">true</span>) {
-    <span style="color:#080;font-weight:bold">let</span> x <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#888">// only inside this `if`
-</span><span style="color:#888"></span>  }
+<h4 id="let">let</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> a <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">2</span>;
+{
+  <span style="color:#080;font-weight:bold">let</span> a <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">3</span>;
+  console.log(<span style="background-color:#fff0f0">&#34;块作用域&#34;</span>, a);
 }
+console.log(<span style="background-color:#fff0f0">&#34;函数作用域&#34;</span>, a);
 </code></pre></div>
-<h4 id="const">Const</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> a <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">1</span>
+<h4 id="const">const</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">{
+  <span style="color:#080;font-weight:bold">const</span> a <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">2</span>;
+  console.log(a); <span style="color:#888">// 2
+</span><span style="color:#888"></span>  a <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">3</span>; <span style="color:#888">// TypeError
+</span><span style="color:#888"></span>}
+<span style="color:#888">// 常量不是对这个值本身的限制，而是对赋值的哪个变量的限制
+</span><span style="color:#888"></span>{
+  <span style="color:#080;font-weight:bold">const</span> a <span style="color:#333">=</span> [<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>];
+  a.push(<span style="color:#00d;font-weight:bold">4</span>);
+  console.log(a); <span style="color:#888">// [1, 2, 3, 4]
+</span><span style="color:#888"></span>
+  a <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">42</span>; <span style="color:#888">// TypeError
+</span><span style="color:#888"></span>}
 </code></pre></div>
-<p><code>let</code> is the new <code>var</code>. Constants work just like <code>let</code>, but can&rsquo;t be reassigned.
-See: <a href="https://babeljs.io/learn-es2015/#let--const">Let and const</a></p>
+<h4 id="块作用域函数">块作用域函数</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">{
+  foo();
 
-<h3 id="backtick-strings">Backtick strings</h3>
-
-<h4 id="interpolation">Interpolation</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> message <span style="color:#333">=</span> <span style="background-color:#fff0f0">`Hello </span><span style="background-color:#eee">${</span>name<span style="background-color:#eee">}</span><span style="background-color:#fff0f0">`</span>
-</code></pre></div>
-<h4 id="multiline-strings">Multiline strings</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> str <span style="color:#333">=</span> <span style="background-color:#fff0f0">`
-</span><span style="background-color:#fff0f0">hello
-</span><span style="background-color:#fff0f0">world
-</span><span style="background-color:#fff0f0">`</span>
-</code></pre></div>
-<p>Templates and multiline strings.
-See: <a href="https://babeljs.io/learn-es2015/#template-strings">Template strings</a></p>
-
-<h3 id="binary-and-octal-literals">Binary and octal literals</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">let</span> bin <span style="color:#333">=</span> <span style="color:#60e;font-weight:bold">0b1010010</span>
-<span style="color:#080;font-weight:bold">let</span> oct <span style="color:#333">=</span> <span style="color:#40e;font-weight:bold">0o755</span>
-</code></pre></div>
-<p>See: <a href="https://babeljs.io/learn-es2015/#binary-and-octal-literals">Binary and octal literals</a></p>
-
-<h3 id="new-methods">New methods</h3>
-
-<h4 id="new-string-methods">New string methods</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="background-color:#fff0f0">&#34;hello&#34;</span>.repeat(<span style="color:#00d;font-weight:bold">3</span>)
-<span style="background-color:#fff0f0">&#34;hello&#34;</span>.includes(<span style="background-color:#fff0f0">&#34;ll&#34;</span>)
-<span style="background-color:#fff0f0">&#34;hello&#34;</span>.startsWith(<span style="background-color:#fff0f0">&#34;he&#34;</span>)
-<span style="background-color:#fff0f0">&#34;hello&#34;</span>.padStart(<span style="color:#00d;font-weight:bold">8</span>) <span style="color:#888">// &#34;   hello&#34;
-</span><span style="color:#888"></span><span style="background-color:#fff0f0">&#34;hello&#34;</span>.padEnd(<span style="color:#00d;font-weight:bold">8</span>) <span style="color:#888">// &#34;hello   &#34; 
-</span><span style="color:#888"></span><span style="background-color:#fff0f0">&#34;hello&#34;</span>.padEnd(<span style="color:#00d;font-weight:bold">8</span>, <span style="background-color:#fff0f0">&#39;!&#39;</span>) <span style="color:#888">// hello!!!
-</span><span style="color:#888"></span><span style="background-color:#fff0f0">&#34;\u1E9B\u0323&#34;</span>.normalize(<span style="background-color:#fff0f0">&#34;NFC&#34;</span>)
-</code></pre></div>
-<p>See: <a href="https://babeljs.io/learn-es2015/#math--number--string--object-apis">New methods</a></p>
-
-<h3 id="classes">Classes</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">class</span> Circle <span style="color:#080;font-weight:bold">extends</span> Shape {
-</code></pre></div>
-<h4 id="constructor">Constructor</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  constructor (radius) {
-    <span style="color:#080;font-weight:bold">this</span>.radius <span style="color:#333">=</span> radius
-  }
-</code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
-
-<h4 id="methods">Methods</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  getArea () {
-    <span style="color:#080;font-weight:bold">return</span> <span style="color:#007020">Math</span>.PI <span style="color:#333">*</span> <span style="color:#00d;font-weight:bold">2</span> <span style="color:#333">*</span> <span style="color:#080;font-weight:bold">this</span>.radius
-  }
-</code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
-
-<h4 id="calling-superclass-methods">Calling superclass methods</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  expand (n) {
-    <span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">super</span>.expand(n) <span style="color:#333">*</span> <span style="color:#007020">Math</span>.PI
-  }
-</code></pre></div>
-<p>{: data-line=&ldquo;2&rdquo;}</p>
-
-<h4 id="static-methods">Static methods</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  <span style="color:#080;font-weight:bold">static</span> createFromDiameter(diameter) {
-    <span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">new</span> Circle(diameter <span style="color:#333">/</span> <span style="color:#00d;font-weight:bold">2</span>)
-  }
+  <span style="color:#080;font-weight:bold">function</span> foo(){}
 }
-</code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
 
-<p>Syntactic sugar for prototypes.
-See: <a href="https://babeljs.io/learn-es2015/#classes">Classes</a></p>
-
-<h3 id="exponent-operator">Exponent operator</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> <span style="color:#080;font-weight:bold">byte</span> <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">2</span> <span style="color:#333">**</span> <span style="color:#00d;font-weight:bold">8</span>
-<span style="color:#888">// Same as: Math.pow(2, 8)
+foo(); <span style="color:#888">// ReferenceError 
 </span></code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
+<h3 id="spread-rest">spread/rest</h3>
 
-<h2 id="promises">Promises</h2>
+<h4 id="spread">spread</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> foo(a, b, c){
+  console.log(a, b, c);
+}
 
-<p>{: .-three-column}</p>
+foo(...[<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>]);
 
-<h3 id="making-promises">Making promises</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">new</span> <span style="color:#007020">Promise</span>((resolve, reject) =&gt; {
-  <span style="color:#080;font-weight:bold">if</span> (ok) { resolve(result) }
-  <span style="color:#080;font-weight:bold">else</span> { reject(error) }
-})
+<span style="color:#080;font-weight:bold">const</span> a <span style="color:#333">=</span> [<span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>];
+<span style="color:#080;font-weight:bold">const</span> b <span style="color:#333">=</span> [<span style="color:#00d;font-weight:bold">1</span>, ...a, <span style="color:#00d;font-weight:bold">4</span>];
 </code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
+<h4 id="rest">rest</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> foo(x, y, ...z){
+  console.log(x, y, z);
+}
 
-<p>For asynchronous programming.
-See: <a href="https://babeljs.io/learn-es2015/#promises">Promises</a></p>
-
-<h3 id="using-promises">Using promises</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">promise
-  .then((result) =&gt; { <span style="color:#f00;background-color:#faa">···</span> })
-  .<span style="color:#080;font-weight:bold">catch</span>((error) =&gt; { <span style="color:#f00;background-color:#faa">···</span> })
+foo(<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>, <span style="color:#00d;font-weight:bold">4</span>, <span style="color:#00d;font-weight:bold">5</span>);
 </code></pre></div>
-<p>{: data-line=&ldquo;2,3&rdquo;}</p>
-
-<h3 id="using-promises-with-finally">Using promises with finally</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">promise
-  .then((result) =&gt; { <span style="color:#f00;background-color:#faa">···</span> })
-  .<span style="color:#080;font-weight:bold">catch</span>((error) =&gt; { <span style="color:#f00;background-color:#faa">···</span> })
-  .<span style="color:#080;font-weight:bold">finally</span>(() =&gt; { <span style="color:#888">// logic independent of success/error })
+<h3 id="默认参数值">默认参数值</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> foo(x <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">11</span>, y <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">31</span>){
+  console.log(x <span style="color:#333">+</span> y);
+}
+foo()  <span style="color:#888">// 42
+</span><span style="color:#888"></span>foo(<span style="color:#00d;font-weight:bold">5</span>, <span style="color:#00d;font-weight:bold">6</span>); <span style="color:#888">// 11
+</span><span style="color:#888"></span>foo(<span style="color:#00d;font-weight:bold">0</span>, <span style="color:#00d;font-weight:bold">42</span>); <span style="color:#888">// 42
+</span><span style="color:#888"></span>
+foo(<span style="color:#00d;font-weight:bold">5</span>); <span style="color:#888">// 36
+</span><span style="color:#888"></span>foo(<span style="color:#00d;font-weight:bold">5</span>, <span style="color:#080;font-weight:bold">undefined</span>); <span style="color:#888">// 36 抛弃 undefined 值
+</span><span style="color:#888"></span>foo(<span style="color:#00d;font-weight:bold">5</span>, <span style="color:#080;font-weight:bold">null</span>); <span style="color:#888">// 5 null 被强制转换为 0
 </span></code></pre></div>
-<p>{: data-line=&ldquo;4&rdquo;}</p>
+<h4 id="默认表达式">默认表达式</h4>
 
-<p>The handler is called when the promise is fulfilled or rejected.</p>
-
-<h3 id="promise-functions">Promise functions</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#007020">Promise</span>.all(<span style="color:#f00;background-color:#faa">···</span>)
-<span style="color:#007020">Promise</span>.race(<span style="color:#f00;background-color:#faa">···</span>)
-<span style="color:#007020">Promise</span>.reject(<span style="color:#f00;background-color:#faa">···</span>)
-<span style="color:#007020">Promise</span>.resolve(<span style="color:#f00;background-color:#faa">···</span>)
-</code></pre></div>
-<h3 id="async-await">Async-await</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">async</span> <span style="color:#080;font-weight:bold">function</span> run () {
-  <span style="color:#080;font-weight:bold">const</span> user <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">await</span> getUser()
-  <span style="color:#080;font-weight:bold">const</span> tweets <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">await</span> getTweets(user)
-  <span style="color:#080;font-weight:bold">return</span> [user, tweets]
+<p>默认表达式时惰性求值，只在允许的时候求值，是在参数的值省略或者为 undefined 的时候调用</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> bar(val){
+  console.log(<span style="background-color:#fff0f0">&#34;bar called!&#34;</span>);
+  <span style="color:#080;font-weight:bold">return</span> y <span style="color:#333">+</span> val;
 }
-</code></pre></div>
-<p>{: data-line=&ldquo;2,3&rdquo;}</p>
-
-<p><code>async</code> functions are another way of using functions.</p>
-
-<p>See: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">async function</a></p>
-
-<h2 id="destructuring">Destructuring</h2>
-
-<p>{: .-three-column}</p>
-
-<h3 id="destructuring-assignment">Destructuring assignment</h3>
-
-<h4 id="arrays">Arrays</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> [first, last] <span style="color:#333">=</span> [<span style="background-color:#fff0f0">&#39;Nikola&#39;</span>, <span style="background-color:#fff0f0">&#39;Tesla&#39;</span>]
-</code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
-
-<h4 id="objects">Objects</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">let</span> {title, author} <span style="color:#333">=</span> {
-  title<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#39;The Silkworm&#39;</span>,
-  author<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#39;R. Galbraith&#39;</span>
+<span style="color:#080;font-weight:bold">function</span> foo(x <span style="color:#333">=</span> y <span style="color:#333">+</span> <span style="color:#00d;font-weight:bold">3</span>, z <span style="color:#333">=</span> bar(x)){
+  console.log(x, z);
 }
-</code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
 
-<p>Supports for matching arrays and objects.
-See: <a href="https://babeljs.io/learn-es2015/#destructuring">Destructuring</a></p>
-
-<h3 id="default-values">Default values</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> scores <span style="color:#333">=</span> [<span style="color:#00d;font-weight:bold">22</span>, <span style="color:#00d;font-weight:bold">33</span>]
-<span style="color:#080;font-weight:bold">const</span> [math <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">50</span>, sci <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">50</span>, arts <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">50</span>] <span style="color:#333">=</span> scores
-</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#888">// Result:
-</span><span style="color:#888">// math === 22, sci === 33, arts === 50
+<span style="color:#080;font-weight:bold">var</span> y <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">5</span>;
+foo(); <span style="color:#888">// bar called!
+</span><span style="color:#888"></span>       <span style="color:#888">// 8 13
+</span><span style="color:#888"></span>
+foo(<span style="color:#00d;font-weight:bold">10</span>); <span style="color:#888">// bar called!
+</span><span style="color:#888"></span>         <span style="color:#888">// 10 15
+</span><span style="color:#888"></span>
+y <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">6</span>;
+foo(<span style="color:#080;font-weight:bold">undefined</span>, <span style="color:#00d;font-weight:bold">10</span>); <span style="color:#888">// 9 10
 </span></code></pre></div>
-<p>Default values can be assigned while destructuring arrays or objects.</p>
-
-<h3 id="function-arguments">Function arguments</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> greet({ name, greeting }) {
-  console.log(<span style="background-color:#fff0f0">`</span><span style="background-color:#eee">${</span>greeting<span style="background-color:#eee">}</span><span style="background-color:#fff0f0">, </span><span style="background-color:#eee">${</span>name<span style="background-color:#eee">}</span><span style="background-color:#fff0f0">!`</span>)
+<h3 id="解构">解构</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> foo(){
+  <span style="color:#080;font-weight:bold">return</span> [<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>];
 }
-</code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">greet({ name<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#39;Larry&#39;</span>, greeting<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#39;Ahoy&#39;</span> })
-</code></pre></div>
-<p>Destructuring of objects and arrays can be also be done in function arguments.</p>
-
-<h3 id="default-values-1">Default values</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> greet({ name <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#39;Rauno&#39;</span> } <span style="color:#333">=</span> {}) {
-  console.log(<span style="background-color:#fff0f0">`Hi </span><span style="background-color:#eee">${</span>name<span style="background-color:#eee">}</span><span style="background-color:#fff0f0">!`</span>);
-}
-</code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">greet() <span style="color:#888">// Hi Rauno!
-</span><span style="color:#888"></span>greet({ name<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#39;Larry&#39;</span> }) <span style="color:#888">// Hi Larry!
-</span></code></pre></div>
-<h3 id="reassigning-keys">Reassigning keys</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> printCoordinates({ left<span style="color:#333">:</span> x, top<span style="color:#333">:</span> y }) {
-  console.log(<span style="background-color:#fff0f0">`x: </span><span style="background-color:#eee">${</span>x<span style="background-color:#eee">}</span><span style="background-color:#fff0f0">, y: </span><span style="background-color:#eee">${</span>y<span style="background-color:#eee">}</span><span style="background-color:#fff0f0">`</span>)
-}
-</code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">printCoordinates({ left<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">25</span>, top<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">90</span> })
-</code></pre></div>
-<p>This example assigns <code>x</code> to the value of the <code>left</code> key.</p>
-
-<h3 id="loops">Loops</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">for</span> (<span style="color:#080;font-weight:bold">let</span> {title, artist} <span style="color:#080;font-weight:bold">of</span> songs) {
-  <span style="color:#f00;background-color:#faa">···</span>
-}
-</code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
-
-<p>The assignment expressions work in loops, too.</p>
-
-<h3 id="object-destructuring">Object destructuring</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> { id, ...detail } <span style="color:#333">=</span> song;
-</code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
-
-<p>Extract some keys individually and remaining keys in the object using rest (&hellip;) operator</p>
-
-<h2 id="spread">Spread</h2>
-
-<h3 id="object-spread">Object spread</h3>
-
-<h4 id="with-object-spread">with Object spread</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> options <span style="color:#333">=</span> {
-  ...defaults,
-  visible<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">true</span>
-}
-</code></pre></div>
-<p>{: data-line=&ldquo;2&rdquo;}</p>
-
-<h4 id="without-object-spread">without Object spread</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> options <span style="color:#333">=</span> <span style="color:#007020">Object</span>.assign(
-  {}, defaults,
-  { visible<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">true</span> })
-</code></pre></div>
-<p>The Object spread operator lets you build new objects from other objects.</p>
-
-<p>See: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">Object spread</a></p>
-
-<h3 id="array-spread">Array spread</h3>
-
-<h4 id="with-array-spread">with Array spread</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> users <span style="color:#333">=</span> [
-  ...admins,
-  ...editors,
-  <span style="background-color:#fff0f0">&#39;rstacruz&#39;</span>
-]
-</code></pre></div>
-<p>{: data-line=&ldquo;2,3&rdquo;}</p>
-
-<h4 id="without-array-spread">without Array spread</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> users <span style="color:#333">=</span> admins
-  .concat(editors)
-  .concat([ <span style="background-color:#fff0f0">&#39;rstacruz&#39;</span> ])
-</code></pre></div>
-<p>The spread operator lets you build new arrays in the same way.</p>
-
-<p>See: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">Spread operator</a></p>
-
-<h2 id="functions">Functions</h2>
-
-<h3 id="function-arguments-1">Function arguments</h3>
-
-<h4 id="default-arguments">Default arguments</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> greet (name <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#39;Jerry&#39;</span>) {
-  <span style="color:#080;font-weight:bold">return</span> <span style="background-color:#fff0f0">`Hello </span><span style="background-color:#eee">${</span>name<span style="background-color:#eee">}</span><span style="background-color:#fff0f0">`</span>
-}
-</code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
-
-<h4 id="rest-arguments">Rest arguments</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> fn(x, ...y) {
-  <span style="color:#888">// y is an Array
-</span><span style="color:#888"></span>  <span style="color:#080;font-weight:bold">return</span> x <span style="color:#333">*</span> y.length
-}
-</code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
-
-<h4 id="spread-1">Spread</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">fn(...[<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>])
-<span style="color:#888">// same as fn(1, 2, 3)
-</span></code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
-
-<p>Default, rest, spread.
-See: <a href="https://babeljs.io/learn-es2015/#default--rest--spread">Function arguments</a></p>
-
-<h3 id="fat-arrows">Fat arrows</h3>
-
-<h4 id="fat-arrows-1">Fat arrows</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">setTimeout(() =&gt; {
-  <span style="color:#f00;background-color:#faa">···</span>
-})
-</code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
-
-<h4 id="with-arguments">With arguments</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">readFile(<span style="background-color:#fff0f0">&#39;text.txt&#39;</span>, (err, data) =&gt; {
-  ...
-})
-</code></pre></div>
-<p>{: data-line=&ldquo;1&rdquo;}</p>
-
-<h4 id="implicit-return">Implicit return</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">numbers.map(n =&gt; n <span style="color:#333">*</span> <span style="color:#00d;font-weight:bold">2</span>)
-<span style="color:#888">// No curly braces = implicit return
-</span><span style="color:#888">// Same as: numbers.map(function (n) { return n * 2 })
-</span><span style="color:#888"></span>numbers.map(n =&gt; ({
-  result<span style="color:#333">:</span> n <span style="color:#333">*</span> <span style="color:#00d;font-weight:bold">2</span>
-})
-<span style="color:#888">// Implicitly returning objects requires parentheses around the object
-</span></code></pre></div>
-<p>{: data-line=&ldquo;1,4,5,6&rdquo;}</p>
-
-<p>Like functions but with <code>this</code> preserved.
-See: <a href="https://babeljs.io/learn-es2015/#arrows-and-lexical-this">Fat arrows</a></p>
-
-<h2 id="objects-1">Objects</h2>
-
-<h3 id="shorthand-syntax">Shorthand syntax</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">module.exports <span style="color:#333">=</span> { hello, bye }
-<span style="color:#888">// Same as: module.exports = { hello: hello, bye: bye }
-</span></code></pre></div>
-<p>See: <a href="https://babeljs.io/learn-es2015/#enhanced-object-literals">Object literal enhancements</a></p>
-
-<h3 id="methods-1">Methods</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> App <span style="color:#333">=</span> {
-  start () {
-    console.log(<span style="background-color:#fff0f0">&#39;running&#39;</span>)
+<span style="color:#080;font-weight:bold">function</span> bar(){
+  <span style="color:#080;font-weight:bold">return</span> {
+    x<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">4</span>,
+    y<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">5</span>,
+    z<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">6</span>
   }
 }
-<span style="color:#888">// Same as: App = { start: function () {···} }
+
+<span style="color:#080;font-weight:bold">var</span> [a, b, c] <span style="color:#333">=</span> foo();
+<span style="color:#080;font-weight:bold">var</span> {x<span style="color:#333">:</span> bam, y<span style="color:#333">:</span> baz, z<span style="color:#333">:</span> bap} <span style="color:#333">=</span> bar(); <span style="color:#888">// var {x, y, z} = bar();
+</span><span style="color:#888"></span>
+console.log(a, b, c);
+console.log(bam, baz, bap);
+</code></pre></div>
+<h3 id="对象字面量扩展">对象字面量扩展</h3>
+
+<h4 id="简介属性">简介属性</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> x <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">2</span>, y <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">3</span>,
+  o <span style="color:#333">=</span> {
+    x,y
+  };
+</code></pre></div>
+<h4 id="简洁方法">简洁方法</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> o <span style="color:#333">=</span> {
+  x(){},
+  y(){}
+};
+</code></pre></div>
+<h4 id="计算属性名">计算属性名</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> prefix <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;user_&#34;</span>;
+<span style="color:#080;font-weight:bold">var</span> o <span style="color:#333">=</span> {
+  [ prefix <span style="color:#333">+</span> <span style="background-color:#fff0f0">&#34;foo&#34;</span> ]<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">function</span>(){}
+};
+</code></pre></div>
+<h4 id="设定-prototype">设定 [[Prototype]]</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> o1 <span style="color:#333">=</span> {};
+<span style="color:#080;font-weight:bold">var</span> o2 <span style="color:#333">=</span> {
+  __proto__<span style="color:#333">:</span> o1
+};
+</code></pre></div>
+<h4 id="super">super</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> o1 <span style="color:#333">=</span> {
+  foo(){
+    console.log(<span style="background-color:#fff0f0">&#34;01: foo&#34;</span>);
+  }
+};
+
+<span style="color:#080;font-weight:bold">var</span> o2 <span style="color:#333">=</span> {
+  foo(){
+    <span style="color:#080;font-weight:bold">super</span>.foo();
+    console.log(<span style="background-color:#fff0f0">&#34;o2: foo&#34;</span>);
+  } 
+};
+
+<span style="color:#007020">Object</span>.setPrototypeOf(o2, o1);
+
+o2.foo(); <span style="color:#888">// o1: foo
+</span><span style="color:#888"></span>          <span style="color:#888">// o2: foo
 </span></code></pre></div>
-<p>{: data-line=&ldquo;2&rdquo;}</p>
+<h3 id="模板字面量">模板字面量</h3>
 
-<p>See: <a href="https://babeljs.io/learn-es2015/#enhanced-object-literals">Object literal enhancements</a></p>
+<h4 id="插入表达式">插入表达式</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> upper(s){
+  <span style="color:#080;font-weight:bold">return</span> s.toUpperCase();
+}
+<span style="color:#080;font-weight:bold">var</span> who <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;render&#34;</span>;
+<span style="color:#080;font-weight:bold">var</span> text <span style="color:#333">=</span> <span style="background-color:#fff0f0">`A very </span><span style="background-color:#eee">${</span>upper(<span style="background-color:#fff0f0">&#34;warm&#34;</span>)<span style="background-color:#eee">}</span><span style="background-color:#fff0f0"> welcome
+</span><span style="background-color:#fff0f0">to all of you </span><span style="background-color:#eee">${</span>upper(<span style="background-color:#fff0f0">`</span><span style="background-color:#eee">${</span>who<span style="background-color:#eee">}</span><span style="background-color:#fff0f0">s`</span>)<span style="background-color:#eee">}</span><span style="background-color:#fff0f0">`</span>;
+console.log(text);
+</code></pre></div>
+<h4 id="标签模板字面量">标签模板字面量</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> foo(strings, ...values){
+  console.log(strings);
+  console.log(values);
+}
 
-<h3 id="getters-and-setters">Getters and setters</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> App <span style="color:#333">=</span> {
-  get closed () {
-    <span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">this</span>.status <span style="color:#333">===</span> <span style="background-color:#fff0f0">&#39;closed&#39;</span>
+<span style="color:#080;font-weight:bold">var</span> desc <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;awesome&#34;</span>;
+foo<span style="background-color:#fff0f0">`Everthing is </span><span style="background-color:#eee">${</span>desc<span style="background-color:#eee">}</span><span style="background-color:#fff0f0">!`</span>;
+<span style="color:#888">// [ &#34;Everthing is &#34;, &#34;!&#34;]
+</span><span style="color:#888">// [&#34;awesome&#34;]
+</span></code></pre></div>
+<h3 id="箭头函数">箭头函数</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> f1 <span style="color:#333">=</span> () =&gt; <span style="color:#00d;font-weight:bold">12</span>;
+<span style="color:#080;font-weight:bold">var</span> f2 <span style="color:#333">=</span> x =&gt; x <span style="color:#333">*</span> <span style="color:#00d;font-weight:bold">2</span>;
+<span style="color:#080;font-weight:bold">var</span> f3 <span style="color:#333">=</span> (x,y) =&gt; {};
+</code></pre></div>
+<p>适用时机：</p>
+
+<ul>
+<li>简短的单句表达式，唯一语句是<code>return</code>某个值，没有<code>this</code>引用，没有自身引用（递归、事件绑定/解绑定）</li>
+<li>内层函数表达式，依赖于在包含它的函数中调用<code>var self = this</code>或者<code>.bind(this)</code>来确保<code>this</code>绑定</li>
+<li>如果内层函数表达式依赖于封装函数中某种像<code>var args = Array.prototype.slice.call(arguments)</code>来保证<code>argumetns</code>的词法复制</li>
+</ul>
+
+<h3 id="for-of-循环">for..of 循环</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> a <span style="color:#333">=</span> [<span style="background-color:#fff0f0">&#34;a&#34;</span>, <span style="background-color:#fff0f0">&#34;b&#34;</span>, <span style="background-color:#fff0f0">&#34;c&#34;</span>, <span style="background-color:#fff0f0">&#34;d&#34;</span>];
+<span style="color:#080;font-weight:bold">for</span>(<span style="color:#080;font-weight:bold">var</span> val <span style="color:#080;font-weight:bold">of</span> a ){
+  console.log(val);
+}
+</code></pre></div>
+<p>默认为 iterable 的标准内建值包括：</p>
+
+<ul>
+<li>Arrays</li>
+<li>Strings</li>
+<li>Generator</li>
+<li>Collections/TypeArrays
+<br /></li>
+</ul>
+
+<h3 id="正则表达式">正则表达式</h3>
+
+<h4 id="unicode-标识">Unicode 标识</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#333">/^</span>.<span style="color:#333">-</span>clef<span style="color:#333">/</span>.test(<span style="background-color:#fff0f0">&#34;𝄞d-clef&#34;</span>)<span style="color:#f00;background-color:#faa">；</span> <span style="color:#888">// false
+</span><span style="color:#888"></span><span style="color:#333">/^</span>.<span style="color:#333">-</span>clef<span style="color:#333">/</span>u.test(<span style="background-color:#fff0f0">&#34;𝄞d-clef&#34;</span>); <span style="color:#888">// true
+</span></code></pre></div>
+<h4 id="定点标识">定点标识</h4>
+
+<p>虚拟锚点</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> regx <span style="color:#333">=</span> <span style="color:#000;background-color:#fff0ff">/foo/y</span>,
+  str <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;++foo++++&#34;</span>;
+
+regx.lastIndex; <span style="color:#888">// 0
+</span><span style="color:#888"></span>regx.test(str); <span style="color:#888">// false
+</span><span style="color:#888"></span>regx.lastIndex; <span style="color:#888">// 0
+</span><span style="color:#888"></span>
+regx.lastIndex <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">2</span>;
+regx.test(str); <span style="color:#888">// true
+</span><span style="color:#888"></span>regx.lastIndex; <span style="color:#888">// 5
+</span><span style="color:#888"></span>
+regx.test(str); <span style="color:#888">// false
+</span><span style="color:#888"></span>regx.lastIndex; <span style="color:#888">// 0 匹配失败后，重置
+</span></code></pre></div>
+<h4 id="获取-flags">获取 flags</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> regx <span style="color:#333">=</span> <span style="color:#000;background-color:#fff0ff">/foo/ig</span>;
+regx.flags; <span style="color:#888">// &#34;gi&#34;
+</span><span style="color:#888"></span>regx.source; <span style="color:#888">// foo
+</span></code></pre></div>
+<h3 id="数字字面量扩展">数字字面量扩展</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> dec <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">42</span>,
+  oct <span style="color:#333">=</span> <span style="color:#40e;font-weight:bold">0o52</span>,
+  hex <span style="color:#333">=</span> <span style="color:#058;font-weight:bold">0x2a</span>,
+  bin <span style="color:#333">=</span> <span style="color:#60e;font-weight:bold">0b101010</span>;
+</code></pre></div>
+<h3 id="unicode">Unicode</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> gclef <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;\u{1D11E}&#34;</span>;
+console.log(gclef); <span style="color:#888">// 𝄞
+</span></code></pre></div>
+<h4 id="字符串的运算">字符串的运算</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> gclef <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;𝄞&#34;</span>;
+gclef.length; <span style="color:#888">// 2
+</span><span style="color:#888"></span>
+[...gclef].length; <span style="color:#888">// 1
+</span><span style="color:#888"></span><span style="color:#007020">Array</span>.from(gclef).length; <span style="color:#888">// 1
+</span><span style="color:#888"></span>
+<span style="color:#080;font-weight:bold">var</span> s1 <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;\xE9&#34;</span>,
+  s2 <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;e\u0301&#34;</span>;
+console.log(s1, s2);
+
+s1.normalize().length; <span style="color:#888">// 1
+</span><span style="color:#888"></span>s2.normaloze().length; <span style="color:#888">// 1
+</span><span style="color:#888"></span>
+s1 <span style="color:#333">===</span> s2; <span style="color:#888">// false
+</span><span style="color:#888"></span>s1 <span style="color:#333">===</span> s2.normaloze(); <span style="color:#888">// true
+</span></code></pre></div>
+<h4 id="字符定位">字符定位</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> s1 <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;abc\u0301d&#34;</span>,
+  s2 <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;ab\u0107d&#34;</span>,
+  s3 <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;db\u[1d49e]d&#34;</span>;
+
+console.log(s1); <span style="color:#888">// &#39;abćd&#39;
+</span><span style="color:#888"></span>console.log(s2); <span style="color:#888">// &#39;abćd&#39;
+</span><span style="color:#888"></span>console.log(s3); <span style="color:#888">// &#39;db𝒞d&#39;
+</span><span style="color:#888"></span>
+s1.charAt(<span style="color:#00d;font-weight:bold">2</span>); <span style="color:#888">// &#39;c&#39;
+</span><span style="color:#888"></span>s2.charAt(<span style="color:#00d;font-weight:bold">2</span>); <span style="color:#888">// &#39;ć&#39;
+</span><span style="color:#888"></span>s3.charAt(<span style="color:#00d;font-weight:bold">2</span>); <span style="color:#888">// &#39;���&#39;
+</span><span style="color:#888"></span>s3.charAt(<span style="color:#00d;font-weight:bold">3</span>); <span style="color:#888">// &#39;���&#39;
+</span><span style="color:#888"></span>
+[...s1.normalize()][<span style="color:#00d;font-weight:bold">2</span>]; <span style="color:#888">// &#39;ć&#39;
+</span><span style="color:#888"></span>[...s2.normalize()][<span style="color:#00d;font-weight:bold">2</span>]; <span style="color:#888">// &#39;ć&#39;
+</span><span style="color:#888"></span>[...s3.normalize()][<span style="color:#00d;font-weight:bold">2</span>]; <span style="color:#888">// &#39;𝒞&#39;
+</span><span style="color:#888"></span>
+s1.normalize().codePointAt(<span style="color:#00d;font-weight:bold">2</span>).toString(<span style="color:#00d;font-weight:bold">16</span>); <span style="color:#888">// &#39;107&#39;
+</span><span style="color:#888"></span>s2.normalize().codePointAt(<span style="color:#00d;font-weight:bold">2</span>).toString(<span style="color:#00d;font-weight:bold">16</span>); <span style="color:#888">// &#39;107&#39;
+</span><span style="color:#888"></span>s3.normalize().codePointAt(<span style="color:#00d;font-weight:bold">2</span>).toString(<span style="color:#00d;font-weight:bold">16</span>); <span style="color:#888">// 1d49e
+</span><span style="color:#888"></span>
+<span style="color:#007020">String</span>.fromCodePonit(<span style="color:#058;font-weight:bold">0x107</span>); <span style="color:#888">// &#39;ć&#39;
+</span><span style="color:#888"></span><span style="color:#007020">String</span>.fromCodePonit(<span style="color:#058;font-weight:bold">0x1d49e</span>); <span style="color:#888">// &#39;𝒞&#39;
+</span><span style="color:#888"></span>
+<span style="color:#888">// 组合
+</span><span style="color:#888"></span><span style="color:#007020">String</span>.fromCodePoint(s1.normalize().codePointAt(<span style="color:#00d;font-weight:bold">2</span>)); <span style="color:#888">// &#39;ć&#39;
+</span><span style="color:#888"></span><span style="color:#007020">String</span>.fromCodePoint(s2.normalize().codePointAt(<span style="color:#00d;font-weight:bold">2</span>)); <span style="color:#888">// &#39;ć&#39;
+</span><span style="color:#888"></span><span style="color:#007020">String</span>.fromCodePoint(s3.normalize().codePointAt(<span style="color:#00d;font-weight:bold">2</span>)); <span style="color:#888">// &#39;𝒞&#39;
+</span></code></pre></div>
+<h4 id="标识符号">标识符号</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> <span style="color:#f00;background-color:#faa">\</span>u{<span style="color:#00d;font-weight:bold">2</span>B400} <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">42</span>; <span style="color:#888">// var 𫐀 = 42;
+</span></code></pre></div>
+<h3 id="符号">符号</h3>
+
+<p>symbol 类型没有字面量形式</p>
+
+<p>有几点值得注意：</p>
+
+<ul>
+<li>不能也不应对<code>Symbol()</code>使用<code>new</code>。</li>
+<li>传给<code>Symbol()</code>的参数是可选的。传入的值是为这个 symbol 的用途给出用户友好的描述的字符串。</li>
+<li><code>typeof</code>的输出是一个新的值“stmbol”，这是失败 symbol 的首选方法。</li>
+</ul>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> sym <span style="color:#333">=</span> Symbol(<span style="background-color:#fff0f0">&#34;some optional description&#34;</span>);
+<span style="color:#080;font-weight:bold">typeof</span> sym; <span style="color:#888">// &#34;symbol&#34;
+</span><span style="color:#888"></span>
+sym.toString(); <span style="color:#888">// &#34;some optional description&#34;
+</span><span style="color:#888"></span>
+<span style="color:#080;font-weight:bold">const</span> INSTANCE <span style="color:#333">=</span> Symbol(<span style="background-color:#fff0f0">&#34;instance&#34;</span>);
+<span style="color:#080;font-weight:bold">function</span> HappyFace(){
+  <span style="color:#080;font-weight:bold">if</span>(HappyFace[INSTANCE]) <span style="color:#080;font-weight:bold">return</span> HappyFace[INSTANCE];
+  <span style="color:#080;font-weight:bold">function</span> smile(){}
+  <span style="color:#080;font-weight:bold">return</span> HappyFace[INSTANCE] <span style="color:#333">=</span> {
+    smile<span style="color:#333">:</span> smile
+  };
+}
+<span style="color:#080;font-weight:bold">var</span> ne <span style="color:#333">=</span> HappyFace(),
+  you <span style="color:#333">=</span> HappyFace();
+
+  me <span style="color:#333">===</span> you; <span style="color:#888">//true
+</span></code></pre></div>
+<h4 id="符号注册">符号注册</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> EVT_LOGIN <span style="color:#333">=</span> Symbol(<span style="background-color:#fff0f0">&#34;event.login&#34;</span>);
+console.log(Symbol.<span style="color:#080;font-weight:bold">for</span>(<span style="background-color:#fff0f0">&#34;event.login&#34;</span>));
+</code></pre></div>
+<h3 id="作为对象的符号属性">作为对象的符号属性</h3>
+
+<p>规范使用 <code>@@</code> 前缀来指代内置符号，最常见的 <code>@@iterator</code>、<code>@@toString</code>、<code>@@toPrimitive</code>。</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> o <span style="color:#333">=</span> {
+  foo<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">42</span>,
+  [Symbol(<span style="background-color:#fff0f0">&#34;bar&#34;</span>)]<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#34;hello world&#34;</span>,
+  baz<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">true</span>
+};
+
+<span style="color:#007020">Object</span>.getOwnPropertyNames(o); <span style="color:#888">// [&#34;foo&#34;, &#34;baz&#34;]
+</span><span style="color:#888"></span><span style="color:#007020">Object</span>.getOwnPropertySymbols(o); <span style="color:#888">// [ Symbol(bar) ]
+</span><span style="color:#888"></span>
+<span style="color:#080;font-weight:bold">var</span> a <span style="color:#333">=</span> [<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>];
+a[Symbol.iterator]; <span style="color:#888">// [Function: values]
+</span></code></pre></div>
+<h2 id="代码组织">代码组织</h2>
+
+<h3 id="迭代器-iterator">迭代器（iterator）</h3>
+
+<h4 id="next-迭代">next() 迭代</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> arr <span style="color:#333">=</span> [<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>];
+<span style="color:#080;font-weight:bold">var</span> arrIterator <span style="color:#333">=</span> arr[Symbol.iterator]();
+
+arrIterator.next(); <span style="color:#888">// {value: 1, done: false}
+</span><span style="color:#888"></span>arrIterator.next(); <span style="color:#888">// {value: 2, done: false}
+</span><span style="color:#888"></span>arrIterator.next(); <span style="color:#888">// {value: 3, done: false}
+</span><span style="color:#888"></span>arrIterator.next(); <span style="color:#888">// {value: undefined, done: true}
+</span></code></pre></div>
+<h4 id="自定义迭代器">自定义迭代器</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#888">// 斐波那契列迭代器
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">var</span> Fib <span style="color:#333">=</span> {
+  [Symbol.iterator](){
+    <span style="color:#080;font-weight:bold">var</span> n1 <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">1</span>, n2 <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">1</span>;
+
+    <span style="color:#080;font-weight:bold">return</span> {
+      [Symbol.iterator](){<span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">this</span>},
+      next(){
+        <span style="color:#080;font-weight:bold">var</span> current <span style="color:#333">=</span> n2;
+        n2 <span style="color:#333">=</span> n1;
+        n1 <span style="color:#333">=</span> n1 <span style="color:#333">+</span> current;
+        <span style="color:#080;font-weight:bold">return</span> {value<span style="color:#333">:</span>current,done<span style="color:#333">:</span><span style="color:#080;font-weight:bold">false</span>};
+      },
+      <span style="color:#080;font-weight:bold">return</span>(v){
+        console.log(<span style="background-color:#fff0f0">&#34;Fibonatic sequence abandoned.&#34;</span>);
+        <span style="color:#080;font-weight:bold">return</span> {value<span style="color:#333">:</span>v,done<span style="color:#333">:</span><span style="color:#080;font-weight:bold">true</span>}
+      }
+    }
+  }
+};
+
+<span style="color:#080;font-weight:bold">for</span>(<span style="color:#080;font-weight:bold">var</span> v <span style="color:#080;font-weight:bold">of</span> Fib){
+  console.log(v);
+  <span style="color:#080;font-weight:bold">if</span>(v <span style="color:#333">&gt;</span> <span style="color:#00d;font-weight:bold">50</span>) <span style="color:#080;font-weight:bold">break</span>;
+}
+
+<span style="color:#888">// 任务队列迭代器
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">var</span> tasks <span style="color:#333">=</span> {
+  [Symbol.iterator](){
+    <span style="color:#080;font-weight:bold">var</span> steps <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">this</span>.actions.slice();
+    <span style="color:#080;font-weight:bold">return</span> {
+      [Symbol.iterator](){<span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">this</span>},
+      next(...args){
+        <span style="color:#080;font-weight:bold">if</span>(steps.length <span style="color:#333">&gt;</span> <span style="color:#00d;font-weight:bold">0</span>){
+          <span style="color:#080;font-weight:bold">let</span> res <span style="color:#333">=</span> steps.shift()(...args);
+          <span style="color:#080;font-weight:bold">return</span> {value<span style="color:#333">:</span>res,done<span style="color:#333">:</span><span style="color:#080;font-weight:bold">false</span>};
+        }
+        <span style="color:#080;font-weight:bold">else</span>{
+          <span style="color:#080;font-weight:bold">return</span> {done<span style="color:#333">:</span><span style="color:#080;font-weight:bold">true</span>};
+        }
+      },
+      <span style="color:#080;font-weight:bold">return</span>(v){
+        steps.length <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">0</span>;
+        <span style="color:#080;font-weight:bold">return</span> {value<span style="color:#333">:</span>v, done<span style="color:#333">:</span><span style="color:#080;font-weight:bold">true</span>};
+      }
+    };
   },
-  set closed (value) {
-    <span style="color:#080;font-weight:bold">this</span>.status <span style="color:#333">=</span> value <span style="color:#333">?</span> <span style="background-color:#fff0f0">&#39;closed&#39;</span> <span style="color:#333">:</span> <span style="background-color:#fff0f0">&#39;open&#39;</span>
+  actions<span style="color:#333">:</span> []
+};
+
+tasks.actions.push(
+  <span style="color:#080;font-weight:bold">function</span> step1(x){
+    console.log(<span style="background-color:#fff0f0">&#34;step 1&#34;</span>, x);
+    <span style="color:#080;font-weight:bold">return</span> x <span style="color:#333">*</span> <span style="color:#00d;font-weight:bold">2</span>;
+  },
+  <span style="color:#080;font-weight:bold">function</span> step2(x, y){
+    console.log(<span style="background-color:#fff0f0">&#34;step 2&#34;</span>, x, y);
+    <span style="color:#080;font-weight:bold">return</span> x  <span style="color:#333">+</span> (y <span style="color:#333">*</span> <span style="color:#00d;font-weight:bold">2</span>);
+  },
+  <span style="color:#080;font-weight:bold">function</span> step3(x, y, z){
+    console.log(<span style="background-color:#fff0f0">&#34;step 3&#34;</span>, x, y, z);
+    <span style="color:#080;font-weight:bold">return</span> (x <span style="color:#333">*</span> y) <span style="color:#333">+</span> <span style="color:#00d;font-weight:bold">2</span>;
+  }
+);
+
+<span style="color:#080;font-weight:bold">var</span> it <span style="color:#333">=</span> tasks[Symbol.iterator]();
+
+it.next(<span style="color:#00d;font-weight:bold">1</span>); <span style="color:#888">// &#39;step 1&#39; 1
+</span><span style="color:#888"></span>            <span style="color:#888">// { value: 2, done: false }
+</span><span style="color:#888"></span>it.next(<span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>); <span style="color:#888">// &#39;step 2&#39; 2 3
+</span><span style="color:#888"></span>              <span style="color:#888">// { value: 8, done: false }
+</span><span style="color:#888"></span>it.next(<span style="color:#00d;font-weight:bold">3</span>, <span style="color:#00d;font-weight:bold">4</span>, <span style="color:#00d;font-weight:bold">5</span>); <span style="color:#888">// &#39;step 3&#39; 3 4 5
+</span><span style="color:#888"></span>                  <span style="color:#888">//  { value: 14, done: false } 
+</span><span style="color:#888"></span>it.next(); <span style="color:#888">// { done: true }
+</span><span style="color:#888"></span>
+<span style="color:#888">// 数字迭代器
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">if</span>(<span style="color:#333">!</span><span style="color:#007020">Number</span>.prototype[Symbol.iterator]){
+  <span style="color:#007020">Object</span>.defineProperty(
+    <span style="color:#007020">Number</span>.prototype,
+    Symbol.iterator,
+    {
+      writable<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">true</span>,
+      configurable<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">true</span>,
+      emumerable<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">false</span>,
+      value<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">function</span>(){
+        <span style="color:#080;font-weight:bold">var</span> i, inc, done <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">false</span>, top <span style="color:#333">=</span> <span style="color:#333">+</span><span style="color:#080;font-weight:bold">this</span>;
+        
+        inc <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#333">*</span> (top <span style="color:#333">&lt;</span> <span style="color:#00d;font-weight:bold">0</span> <span style="color:#333">?</span> <span style="color:#333">-</span><span style="color:#00d;font-weight:bold">1</span><span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">1</span>);
+        <span style="color:#080;font-weight:bold">return</span> {
+          [Symbol.iterable](){<span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">this</span>;},
+          next(){
+            <span style="color:#080;font-weight:bold">if</span>(<span style="color:#333">!</span>done){
+              <span style="color:#080;font-weight:bold">if</span>(i<span style="color:#333">==</span><span style="color:#080;font-weight:bold">null</span>){
+                i <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">0</span>;
+              }
+              <span style="color:#080;font-weight:bold">else</span> <span style="color:#080;font-weight:bold">if</span>(top <span style="color:#333">&gt;=</span> <span style="color:#00d;font-weight:bold">0</span>){
+                i <span style="color:#333">=</span> <span style="color:#007020">Math</span>.min(top, i <span style="color:#333">+</span> inc);
+              }
+              <span style="color:#080;font-weight:bold">else</span>{
+                i <span style="color:#333">=</span> <span style="color:#007020">Math</span>.max(top, i <span style="color:#333">+</span> inc);
+              }
+              <span style="color:#080;font-weight:bold">if</span>(i <span style="color:#333">==</span> top) done <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">true</span>;
+              <span style="color:#080;font-weight:bold">return</span> {value<span style="color:#333">:</span> i, done<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">false</span>};
+            }
+            <span style="color:#080;font-weight:bold">else</span>{
+              <span style="color:#080;font-weight:bold">return</span> {done<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">true</span>};
+            }
+          }
+        };
+      }
+    }
+  )
+}
+
+<span style="color:#080;font-weight:bold">for</span> (<span style="color:#080;font-weight:bold">var</span> i <span style="color:#080;font-weight:bold">of</span> <span style="color:#333">-</span><span style="color:#00d;font-weight:bold">6</span>){
+  console.log(i)
+}
+</code></pre></div>
+<h3 id="生成器">生成器</h3>
+
+<h4 id="语法-1">语法</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> <span style="color:#333">*</span>foo(){
+  console.log(<span style="background-color:#fff0f0">&#34;Generator&#34;</span>);
+}
+
+<span style="color:#080;font-weight:bold">var</span> it <span style="color:#333">=</span> foo();
+it.next();
+
+<span style="color:#888">// yield
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">function</span> <span style="color:#333">*</span>foo(){
+  <span style="color:#080;font-weight:bold">var</span> x <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">10</span>;
+  <span style="color:#080;font-weight:bold">var</span> y <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">20</span>;
+  <span style="color:#080;font-weight:bold">yield</span>;
+
+  <span style="color:#080;font-weight:bold">var</span> z <span style="color:#333">=</span> x <span style="color:#333">+</span> y;
+}
+
+<span style="color:#080;font-weight:bold">function</span> <span style="color:#333">*</span>foo(){
+  <span style="color:#080;font-weight:bold">var</span> arr <span style="color:#333">=</span> [<span style="color:#080;font-weight:bold">yield</span> <span style="color:#00d;font-weight:bold">1</span>, <span style="color:#080;font-weight:bold">yield</span> <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#080;font-weight:bold">yield</span> <span style="color:#00d;font-weight:bold">3</span>];
+  console.log(arr, <span style="color:#080;font-weight:bold">yield</span> <span style="color:#00d;font-weight:bold">4</span>);
+}
+
+<span style="color:#080;font-weight:bold">var</span> it <span style="color:#333">=</span> foo();
+it.next(<span style="color:#00d;font-weight:bold">5</span>); <span style="color:#888">// { value: 1, done: false }
+</span><span style="color:#888"></span>it.next(<span style="color:#00d;font-weight:bold">6</span>); <span style="color:#888">// { value: 2, done: false }
+</span><span style="color:#888"></span>it.next(<span style="color:#00d;font-weight:bold">7</span>); <span style="color:#888">// { value: 3, done: false }
+</span><span style="color:#888"></span>it.next(<span style="color:#00d;font-weight:bold">8</span>); <span style="color:#888">// { value: 4, done: false }
+</span><span style="color:#888"></span>it.next(<span style="color:#00d;font-weight:bold">9</span>); <span style="color:#888">// [ 6, 7, 8 ] 9
+</span><span style="color:#888"></span>            <span style="color:#888">// { value: undefined, done: true }
+</span></code></pre></div>
+<h4 id="迭代器控制">迭代器控制</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> <span style="color:#333">*</span>foo(x){
+  <span style="color:#080;font-weight:bold">if</span>(x <span style="color:#333">&lt;</span> <span style="color:#00d;font-weight:bold">3</span>){
+    x <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">yield</span> <span style="color:#333">*</span>foo(x <span style="color:#333">+</span> <span style="color:#00d;font-weight:bold">1</span>);
+  }
+  <span style="color:#080;font-weight:bold">return</span> x <span style="color:#333">+</span> <span style="color:#00d;font-weight:bold">2</span>;
+}
+
+<span style="color:#080;font-weight:bold">var</span> it <span style="color:#333">=</span> foo(<span style="color:#00d;font-weight:bold">1</span>);
+it.next(); <span style="color:#888">// { value: 24, done: true }
+</span></code></pre></div>
+<h4 id="提前完成">提前完成</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> <span style="color:#333">*</span>foo(){
+  <span style="color:#080;font-weight:bold">yield</span> <span style="color:#00d;font-weight:bold">1</span>;
+  <span style="color:#080;font-weight:bold">yield</span> <span style="color:#00d;font-weight:bold">2</span>;
+  <span style="color:#080;font-weight:bold">yield</span> <span style="color:#00d;font-weight:bold">3</span>;
+}
+
+<span style="color:#080;font-weight:bold">var</span> it <span style="color:#333">=</span> foo();
+it.next(); <span style="color:#888">// { value: 1, done: false }
+</span><span style="color:#888"></span>it.<span style="color:#080;font-weight:bold">return</span>(); <span style="color:#888">// { value: undefined, done: true }
+</span><span style="color:#888"></span>it.next(); <span style="color:#888">// { value: undefined, done: true }
+</span><span style="color:#888"></span>
+<span style="color:#888">// finally
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">function</span> <span style="color:#333">*</span>foo(){
+  <span style="color:#080;font-weight:bold">try</span>{
+      <span style="color:#080;font-weight:bold">yield</span> <span style="color:#00d;font-weight:bold">1</span>;
+      <span style="color:#080;font-weight:bold">yield</span> <span style="color:#00d;font-weight:bold">2</span>;
+      <span style="color:#080;font-weight:bold">yield</span> <span style="color:#00d;font-weight:bold">3</span>;
+  }
+  <span style="color:#080;font-weight:bold">finally</span>{
+    console.log(<span style="background-color:#fff0f0">&#34;cleanup&#34;</span>);
+  }
+}
+
+<span style="color:#080;font-weight:bold">for</span>(<span style="color:#080;font-weight:bold">var</span> v <span style="color:#080;font-weight:bold">of</span> foo()){
+  console.log(v);
+}
+<span style="color:#888">// 1 2 3
+</span><span style="color:#888">// &#39;cleanup&#39;
+</span><span style="color:#888"></span>
+<span style="color:#080;font-weight:bold">var</span> it <span style="color:#333">=</span> foo();
+it.next(); <span style="color:#888">// { value: 1, done: false }
+</span><span style="color:#888"></span>it.<span style="color:#080;font-weight:bold">return</span>(); <span style="color:#888">// &#39;cleanup&#39;
+</span><span style="color:#888"></span>             <span style="color:#888">// { value: undefined, done: true }
+</span><span style="color:#888"></span>it.next(); <span style="color:#888">// { value: undefined, done: true }
+</span></code></pre></div>
+<h4 id="错误处理">错误处理</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> <span style="color:#333">*</span>foo(){
+  <span style="color:#080;font-weight:bold">try</span>{
+    <span style="color:#080;font-weight:bold">yield</span> <span style="color:#00d;font-weight:bold">1</span>;
+  }
+  <span style="color:#080;font-weight:bold">catch</span>(err){
+    console.log(err);
+  }
+  <span style="color:#080;font-weight:bold">yield</span> <span style="color:#00d;font-weight:bold">2</span>;
+  
+  <span style="color:#080;font-weight:bold">throw</span> <span style="background-color:#fff0f0">&#34;Hello&#34;</span>;
+}
+
+<span style="color:#080;font-weight:bold">var</span> it <span style="color:#333">=</span> foo();
+it.next();
+<span style="color:#080;font-weight:bold">try</span>{
+  it.<span style="color:#080;font-weight:bold">throw</span>(<span style="background-color:#fff0f0">&#34;HL!&#34;</span>);
+  it.next();
+  console.log(<span style="background-color:#fff0f0">&#34;never gets here&#34;</span>);
+}<span style="color:#080;font-weight:bold">catch</span>(err){
+  console.log(err);
+}
+</code></pre></div>
+<h4 id="自制生成器">自制生成器</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> foo() {
+	<span style="color:#080;font-weight:bold">function</span> nextState(v) {
+		<span style="color:#080;font-weight:bold">switch</span> (state) {
+			<span style="color:#080;font-weight:bold">case</span> <span style="color:#00d;font-weight:bold">0</span><span style="color:#333">:</span>
+				state<span style="color:#333">++</span>;
+
+				<span style="color:#888">// the `yield` expression
+</span><span style="color:#888"></span>				<span style="color:#080;font-weight:bold">return</span> <span style="color:#00d;font-weight:bold">42</span>;
+			<span style="color:#080;font-weight:bold">case</span> <span style="color:#00d;font-weight:bold">1</span><span style="color:#333">:</span>
+				state<span style="color:#333">++</span>;
+
+				<span style="color:#888">// `yield` expression fulfilled
+</span><span style="color:#888"></span>				x <span style="color:#333">=</span> v;
+				console.log( x );
+
+				<span style="color:#888">// the implicit `return`
+</span><span style="color:#888"></span>				<span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">undefined</span>;
+
+			<span style="color:#888">// no need to handle state `2`
+</span><span style="color:#888"></span>		}
+	}
+
+	<span style="color:#080;font-weight:bold">var</span> state <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">0</span>, x;
+
+	<span style="color:#080;font-weight:bold">return</span> {
+		next<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">function</span>(v) {
+			<span style="color:#080;font-weight:bold">var</span> ret <span style="color:#333">=</span> nextState( v );
+
+			<span style="color:#080;font-weight:bold">return</span> { value<span style="color:#333">:</span> ret, done<span style="color:#333">:</span> (state <span style="color:#333">==</span> <span style="color:#00d;font-weight:bold">2</span>) };
+		}
+
+		<span style="color:#888">// we&#39;ll skip `return(..)` and `throw(..)`
+</span><span style="color:#888"></span>	};
+}
+
+<span style="color:#080;font-weight:bold">var</span> it <span style="color:#333">=</span> foo();
+
+it.next();				<span style="color:#888">// { value: 42, done: false }
+</span><span style="color:#888"></span>
+it.next( <span style="color:#00d;font-weight:bold">10</span> );	<span style="color:#888">// 10
+</span><span style="color:#888"></span>                <span style="color:#888">// { value: undefined, done: true }
+</span></code></pre></div>
+<h3 id="模块">模块</h3>
+
+<h4 id="导出-api-成员">导出 API 成员</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#888">// 模块内部没有全局作用域
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">export</span> <span style="color:#080;font-weight:bold">function</span> foo() {
+    console.log(<span style="background-color:#fff0f0">&#34;function foo&#34;</span>);
+}
+
+<span style="color:#080;font-weight:bold">export</span> <span style="color:#080;font-weight:bold">var</span> awesome <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">42</span>;
+
+<span style="color:#080;font-weight:bold">var</span> bar <span style="color:#333">=</span> [<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>];
+<span style="color:#080;font-weight:bold">export</span> {
+    bar
+};
+
+<span style="color:#888">// 静默导出
+</span><span style="color:#888">// 导出的是函数表达式的绑定，而不是标识符 foo
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">function</span> foo(){
+  console.log(<span style="background-color:#fff0f0">&#34;foo&#34;</span>);
+}
+<span style="color:#080;font-weight:bold">export</span> <span style="color:#080;font-weight:bold">default</span> foo;
+<span style="color:#888">// 导出绑定到 foo 标识符而不是它的值
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">function</span> foo(){
+  console.log(<span style="background-color:#fff0f0">&#34;foo&#34;</span>);
+}
+<span style="color:#080;font-weight:bold">export</span> {foo as <span style="color:#080;font-weight:bold">default</span>};
+</code></pre></div>
+<h4 id="导入-api">导入 API</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">import</span> {
+    foo,
+    awesome,
+    bar,
+    renamefoo as foo2
+} from <span style="background-color:#fff0f0">&#34;./module1.js&#34;</span>;
+
+<span style="color:#080;font-weight:bold">export</span> <span style="color:#080;font-weight:bold">default</span> <span style="color:#080;font-weight:bold">function</span> foo(){}
+<span style="color:#080;font-weight:bold">export</span> <span style="color:#080;font-weight:bold">function</span> bar(){}
+<span style="color:#080;font-weight:bold">export</span> <span style="color:#080;font-weight:bold">function</span> baz(){}
+
+<span style="color:#080;font-weight:bold">import</span> foofn,<span style="color:#333">*</span> as hello from <span style="background-color:#fff0f0">&#34;world&#34;</span>;
+foofn();
+hello.<span style="color:#080;font-weight:bold">default</span>();
+hello.bar();
+hello.baz();
+</code></pre></div>
+<h3 id="类-class">类（Class）</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">class</span> Foo{
+  constructor(a, b){
+    <span style="color:#080;font-weight:bold">this</span>.x <span style="color:#333">=</span> a;
+    <span style="color:#080;font-weight:bold">this</span>.y <span style="color:#333">=</span> b;
+  }
+  gimmeXY(){
+    <span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">this</span>.x <span style="color:#333">+</span> <span style="color:#080;font-weight:bold">this</span>.y;
   }
 }
 </code></pre></div>
-<p>{: data-line=&ldquo;2,5&rdquo;}</p>
+<p>注意：</p>
 
-<p>See: <a href="https://babeljs.io/learn-es2015/#enhanced-object-literals">Object literal enhancements</a></p>
+<ul>
+<li>class Foo 的 <code>Foo.call(obj)</code> 不能工作，必须通过<code>new</code>方法使用</li>
+<li>class Foo 不会提升</li>
+<li>class Foo 是作用域的词法标识符，而 function Foo 会创建一个同名的全局对象属性</li>
+</ul>
 
-<h3 id="computed-property-names">Computed property names</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">let</span> event <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#39;click&#39;</span>
-<span style="color:#080;font-weight:bold">let</span> handlers <span style="color:#333">=</span> {
-  [<span style="background-color:#fff0f0">`on</span><span style="background-color:#eee">${</span>event<span style="background-color:#eee">}</span><span style="background-color:#fff0f0">`</span>]<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">true</span>
+<h4 id="extends-和-super">extends 和 super</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">class</span> Foo{
+  constructor(a, b){
+    <span style="color:#080;font-weight:bold">this</span>.x <span style="color:#333">=</span> a;
+    <span style="color:#080;font-weight:bold">this</span>.y <span style="color:#333">=</span> b;
+  }
+  gimmeXY(){
+    <span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">this</span>.x <span style="color:#333">+</span> <span style="color:#080;font-weight:bold">this</span>.y;
+  }
 }
-<span style="color:#888">// Same as: handlers = { &#39;onclick&#39;: true }
-</span></code></pre></div>
-<p>{: data-line=&ldquo;3&rdquo;}</p>
 
-<p>See: <a href="https://babeljs.io/learn-es2015/#enhanced-object-literals">Object literal enhancements</a></p>
-
-<h3 id="extract-values">Extract values</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> fatherJS <span style="color:#333">=</span> { age<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">57</span>, name<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#34;Brendan Eich&#34;</span> }
-
-<span style="color:#007020">Object</span>.values(fatherJS)
-<span style="color:#888">// [57, &#34;Brendan Eich&#34;]
-</span><span style="color:#888"></span><span style="color:#007020">Object</span>.entries(fatherJS)
-<span style="color:#888">// [[&#34;age&#34;, 57], [&#34;name&#34;, &#34;Brendan Eich&#34;]]
-</span></code></pre></div>
-<p>{: data-line=&ldquo;3,5&rdquo;}</p>
-
-<h2 id="modules">Modules</h2>
-
-<h3 id="imports">Imports</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">import</span> <span style="background-color:#fff0f0">&#39;helpers&#39;</span>
-<span style="color:#888">// aka: require(&#39;···&#39;)
-</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">import</span> Express from <span style="background-color:#fff0f0">&#39;express&#39;</span>
-<span style="color:#888">// aka: const Express = require(&#39;···&#39;).default || require(&#39;···&#39;)
-</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">import</span> { indent } from <span style="background-color:#fff0f0">&#39;helpers&#39;</span>
-<span style="color:#888">// aka: const indent = require(&#39;···&#39;).indent
-</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">import</span> <span style="color:#333">*</span> as Helpers from <span style="background-color:#fff0f0">&#39;helpers&#39;</span>
-<span style="color:#888">// aka: const Helpers = require(&#39;···&#39;)
-</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">import</span> { indentSpaces as indent } from <span style="background-color:#fff0f0">&#39;helpers&#39;</span>
-<span style="color:#888">// aka: const indent = require(&#39;···&#39;).indentSpaces
-</span></code></pre></div>
-<p><code>import</code> is the new <code>require()</code>.
-See: <a href="https://babeljs.io/learn-es2015/#modules">Module imports</a></p>
-
-<h3 id="exports">Exports</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">export</span> <span style="color:#080;font-weight:bold">default</span> <span style="color:#080;font-weight:bold">function</span> () { <span style="color:#f00;background-color:#faa">···</span> }
-<span style="color:#888">// aka: module.exports.default = ···
-</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">export</span> <span style="color:#080;font-weight:bold">function</span> mymethod () { <span style="color:#f00;background-color:#faa">···</span> }
-<span style="color:#888">// aka: module.exports.mymethod = ···
-</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">export</span> <span style="color:#080;font-weight:bold">const</span> pi <span style="color:#333">=</span> <span style="color:#60e;font-weight:bold">3.14159</span>
-<span style="color:#888">// aka: module.exports.pi = ···
-</span></code></pre></div>
-<p><code>export</code> is the new <code>module.exports</code>.
-See: <a href="https://babeljs.io/learn-es2015/#modules">Module exports</a></p>
-
-<h2 id="generators">Generators</h2>
-
-<h3 id="generators-1">Generators</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span><span style="color:#333">*</span> idMaker () {
-  <span style="color:#080;font-weight:bold">let</span> id <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">0</span>
-  <span style="color:#080;font-weight:bold">while</span> (<span style="color:#080;font-weight:bold">true</span>) { <span style="color:#080;font-weight:bold">yield</span> id<span style="color:#333">++</span> }
+<span style="color:#080;font-weight:bold">class</span> Bar <span style="color:#080;font-weight:bold">extends</span> Foo{
+  constructor(a, b, c){
+    <span style="color:#080;font-weight:bold">super</span>(a, b);
+    <span style="color:#080;font-weight:bold">this</span>.z <span style="color:#333">=</span> c;
+  }
+  
+  gimmeXYZ(){
+    <span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">super</span>.gimmeXY() <span style="color:#333">*</span> <span style="color:#080;font-weight:bold">this</span>.z;
+  }
 }
-</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">let</span> gen <span style="color:#333">=</span> idMaker()
-gen.next().value  <span style="color:#888">// → 0
-</span><span style="color:#888"></span>gen.next().value  <span style="color:#888">// → 1
-</span><span style="color:#888"></span>gen.next().value  <span style="color:#888">// → 2
-</span></code></pre></div>
-<p>It&rsquo;s complicated.
-See: <a href="https://babeljs.io/learn-es2015/#generators">Generators</a></p>
 
-<h3 id="for-of-iteration">For..of iteration</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">for</span> (<span style="color:#080;font-weight:bold">let</span> i <span style="color:#080;font-weight:bold">of</span> iterable) {
-  <span style="color:#f00;background-color:#faa">···</span>
-}
+<span style="color:#080;font-weight:bold">var</span> b <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Bar(<span style="color:#00d;font-weight:bold">5</span>, <span style="color:#00d;font-weight:bold">15</span>, <span style="color:#00d;font-weight:bold">25</span>);
+b.x;
+b.y;
+b.z;
+b.gimmeXYZ();
 </code></pre></div>
-<p>For iterating through generators and arrays.
-See: <a href="https://babeljs.io/learn-es2015/#iterators--forof">For..of iteration</a></p>
+<h4 id="new-target">new.target</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">class</span> Foo{
+  constructor(){
+    console.log(<span style="background-color:#fff0f0">&#34;FOO: &#34;</span>, <span style="color:#080;font-weight:bold">new</span>.target.name);
+  }
+}
 
+<span style="color:#080;font-weight:bold">class</span> Bar <span style="color:#080;font-weight:bold">extends</span> Foo{
+  constructor(){
+    <span style="color:#080;font-weight:bold">super</span>();
+    console.log(<span style="background-color:#fff0f0">&#34;Bar: &#34;</span>, <span style="color:#080;font-weight:bold">new</span>.target.name);
+  }
+  
+  baz(){
+    console.log(<span style="background-color:#fff0f0">&#34;Bar baz: &#34;</span>, <span style="color:#080;font-weight:bold">new</span>.target);
+  }
+}
+
+<span style="color:#080;font-weight:bold">var</span> a <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Foo();
+
+<span style="color:#080;font-weight:bold">var</span> b <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Bar();
+
+b.baz();
+</code></pre></div>
+<h4 id="static">static</h4>
+
+<p>之间添加到这个类对象的属性上</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">class</span> Foo{
+  <span style="color:#080;font-weight:bold">static</span> cool(){console.log(<span style="background-color:#fff0f0">&#34;cool&#34;</span>)}
+  wow(){
+    console.log(<span style="background-color:#fff0f0">&#34;wow&#34;</span>);
+  }
+}
+
+<span style="color:#080;font-weight:bold">class</span> Bar <span style="color:#080;font-weight:bold">extends</span> Foo{
+  <span style="color:#080;font-weight:bold">static</span> awesome(){
+    <span style="color:#080;font-weight:bold">super</span>.cool();
+    console.log(<span style="background-color:#fff0f0">&#34;awesome&#34;</span>);
+  }
+  neat(){
+    <span style="color:#080;font-weight:bold">super</span>.wow();
+    console.log(<span style="background-color:#fff0f0">&#34;neat&#34;</span>);
+  }
+}
+
+Foo.cool(); <span style="color:#888">// &#39;cool&#39;
+</span><span style="color:#888"></span>
+Bar.cool(); <span style="color:#888">// &#39;cool&#39;
+</span><span style="color:#888"></span>Bar.awesome(); <span style="color:#888">// &#39;cool&#39;
+</span><span style="color:#888"></span>               <span style="color:#888">// &#39;awesome&#39;
+</span><span style="color:#888"></span>
+<span style="color:#080;font-weight:bold">var</span> b <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Bar();
+b.neat(); <span style="color:#888">// &#39;wow&#39;
+</span><span style="color:#888"></span>          <span style="color:#888">// &#39;neat&#39;
+</span><span style="color:#888"></span>
+b.awesome; <span style="color:#888">// undefined
+</span><span style="color:#888"></span>b.cool; <span style="color:#888">// undefined
+</span><span style="color:#888"></span>
+<span style="color:#888">// 派生子类，但是不想用使用子类的构造器本身
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">class</span> MyCoolArray <span style="color:#080;font-weight:bold">extends</span> <span style="color:#007020">Array</span>{
+  <span style="color:#080;font-weight:bold">static</span> get [Symbol.species]() {
+    <span style="color:#080;font-weight:bold">return</span> <span style="color:#007020">Array</span>;
+  }
+}
+
+<span style="color:#080;font-weight:bold">var</span> a <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> MyCoolArray(<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>),
+     b <span style="color:#333">=</span> a.map(<span style="color:#080;font-weight:bold">function</span>(v){<span style="color:#080;font-weight:bold">return</span> v <span style="color:#333">*</span> <span style="color:#00d;font-weight:bold">2</span>});
+
+(b <span style="color:#080;font-weight:bold">instanceof</span> MyCoolArray); <span style="color:#888">// false
+</span><span style="color:#888"></span>(b <span style="color:#080;font-weight:bold">instanceof</span> <span style="color:#007020">Array</span>); <span style="color:#888">// true
+</span><span style="color:#888"></span>
+<span style="color:#888">// 父类使用子类的 species 声明
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">class</span> Foo {
+	<span style="color:#080;font-weight:bold">static</span> get [Symbol.species]() { <span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">this</span>; }
+	spawn() {
+		<span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">new</span> <span style="color:#080;font-weight:bold">this</span>.constructor[Symbol.species]();
+	}
+}
+
+<span style="color:#080;font-weight:bold">class</span> Bar <span style="color:#080;font-weight:bold">extends</span> Foo {
+	<span style="color:#080;font-weight:bold">static</span> get [Symbol.species]() { <span style="color:#080;font-weight:bold">return</span> Foo; }
+}
+
+<span style="color:#080;font-weight:bold">var</span> a <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Foo();
+<span style="color:#080;font-weight:bold">var</span> b <span style="color:#333">=</span> a.spawn();
+b <span style="color:#080;font-weight:bold">instanceof</span> Foo;					<span style="color:#888">// true
+</span><span style="color:#888"></span>
+<span style="color:#080;font-weight:bold">var</span> x <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Bar();
+<span style="color:#080;font-weight:bold">var</span> y <span style="color:#333">=</span> x.spawn();
+y <span style="color:#080;font-weight:bold">instanceof</span> Bar;					<span style="color:#888">// false
+</span><span style="color:#888"></span>y <span style="color:#080;font-weight:bold">instanceof</span> Foo;					<span style="color:#888">// true
+</span></code></pre></div>
+<h2 id="异步控制流">异步控制流</h2>
+
+<h3 id="promise">Promise</h3>
+
+<p><code>Promise</code> 在回调函数和将要执行这个任务的异步代码之间提供可靠的中间机制管理回调。</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> promise <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> <span style="color:#007020">Promise</span>(<span style="color:#080;font-weight:bold">function</span> (resolve, reject){
+  
+});
+</code></pre></div>
+<h3 id="生成器-promise">生成器 + Promise</h3>
+
+<p>待完善</p>
+
+<h2 id="集合">集合</h2>
+
+<h3 id="typedarray">TypedArray</h3>
+
+<p>待完善&hellip;</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#888">// 256 位 buf 上映射的一个 16 位无符号整型的类型数组
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">var</span> buf <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> ArrayBuffer(<span style="color:#00d;font-weight:bold">32</span>);
+buf.byteLength;
+<span style="color:#080;font-weight:bold">var</span> arr <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Uint16Array(buf);
+arr.length;
+</code></pre></div>
+<h4 id="大小端-endianness">大小端（Endianness）</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#888">// 检测方式
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">var</span> litteEndian <span style="color:#333">=</span> (<span style="color:#080;font-weight:bold">function</span>(){
+  <span style="color:#080;font-weight:bold">var</span> buffer <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> ArrayBuffer(<span style="color:#00d;font-weight:bold">2</span>);
+  <span style="color:#080;font-weight:bold">new</span> DataView(buffer).setInt16(<span style="color:#00d;font-weight:bold">0</span>, <span style="color:#00d;font-weight:bold">256</span>, <span style="color:#080;font-weight:bold">true</span>);
+  <span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">new</span> Int16Array(buffer)[<span style="color:#00d;font-weight:bold">0</span>] <span style="color:#333">===</span> <span style="color:#080;font-weight:bold">true</span>;
+})();
+</code></pre></div>
+<h3 id="map">Map</h3>
+
+<p>允许你把某些额外的信息（值）关联到一个对象（键）上，而无需把这个信息放入对象本身。</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> m <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Map();
+
+<span style="color:#080;font-weight:bold">var</span> x <span style="color:#333">=</span> {id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">1</span>},
+    y <span style="color:#333">=</span> {id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">2</span>};
+
+m.set(x, <span style="background-color:#fff0f0">&#34;foo&#34;</span>); <span style="color:#888">// Map { { id: 1 } =&gt; &#39;foo&#39; }
+</span><span style="color:#888"></span>m.set(y, <span style="background-color:#fff0f0">&#34;bar&#34;</span>); <span style="color:#888">// Map { { id: 1 } =&gt; &#39;foo&#39;, { id: 2 } =&gt; &#39;bar&#39; }
+</span><span style="color:#888"></span>
+m.get(x); <span style="color:#888">// &#39;foo&#39;
+</span><span style="color:#888"></span>m.get(y); <span style="color:#888">// &#39;bar&#39;
+</span><span style="color:#888"></span>m.size; <span style="color:#888">// 2
+</span><span style="color:#888"></span>
+m.<span style="color:#080;font-weight:bold">delete</span>(x); <span style="color:#888">// 删除
+</span><span style="color:#888"></span>m.clear(); <span style="color:#888">// 清空
+</span><span style="color:#888"></span>
+<span style="color:#080;font-weight:bold">var</span> n2 <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Map(m.entries());
+<span style="color:#888">// 等价
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">var</span> m2 <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Map(m);
+
+<span style="color:#080;font-weight:bold">var</span> x <span style="color:#333">=</span> {id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">1</span>},
+    y <span style="color:#333">=</span> {id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">2</span>};
+<span style="color:#080;font-weight:bold">var</span> m <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Map([[x,<span style="background-color:#fff0f0">&#34;foo&#34;</span>], [y, <span style="background-color:#fff0f0">&#34;bar&#34;</span>]]);
+m.get(x); <span style="color:#888">// &#39;foo&#39;
+</span><span style="color:#888"></span>m.get(y); <span style="color:#888">// &#39;bar&#39;
+</span></code></pre></div>
+<h4 id="值">值</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> m <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Map();
+
+<span style="color:#080;font-weight:bold">var</span> x <span style="color:#333">=</span> {id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">1</span>},
+    y <span style="color:#333">=</span> {id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">2</span>};
+
+m.set(x, <span style="background-color:#fff0f0">&#34;foo&#34;</span>);
+m.set(y, <span style="background-color:#fff0f0">&#34;bar&#34;</span>);
+
+<span style="color:#080;font-weight:bold">var</span> vals <span style="color:#333">=</span> [...m.values()];
+vals; <span style="color:#888">// [&#39;foo&#39;, &#39;bar&#39;]
+</span><span style="color:#888"></span><span style="color:#007020">Array</span>.from(m.values()); <span style="color:#888">// [&#39;foo&#39;, &#39;bar&#39;]
+</span><span style="color:#888"></span>
+<span style="color:#080;font-weight:bold">var</span> vals2 <span style="color:#333">=</span> [...m.entries()];
+vals2[<span style="color:#00d;font-weight:bold">0</span>][<span style="color:#00d;font-weight:bold">0</span>] <span style="color:#333">===</span> x; <span style="color:#888">// true
+</span><span style="color:#888"></span>vals2[<span style="color:#00d;font-weight:bold">0</span>][<span style="color:#00d;font-weight:bold">1</span>]; <span style="color:#888">// &#39;foo&#39;
+</span></code></pre></div>
+<h4 id="键">键</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> m <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Map();
+
+<span style="color:#080;font-weight:bold">var</span> x <span style="color:#333">=</span> {id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">1</span>},
+    y <span style="color:#333">=</span> {id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">2</span>};
+
+m.set(x, <span style="background-color:#fff0f0">&#34;foo&#34;</span>);
+m.set(y, <span style="background-color:#fff0f0">&#34;bar&#34;</span>);
+
+<span style="color:#080;font-weight:bold">var</span> keys <span style="color:#333">=</span> [...m.keys()];
+
+keys[<span style="color:#00d;font-weight:bold">0</span>] <span style="color:#333">===</span> x; <span style="color:#888">// true
+</span><span style="color:#888"></span>m.has(y); <span style="color:#888">// true
+</span></code></pre></div>
+<h4 id="weakmap">WeakMap</h4>
+
+<p>WeakMap 是 mao 的变体，二者的多数外部行为特征都是一样的，区别在于内部内存分配（GC）的工作方式。</p>
+
+<p>没有 size 属性和 clear 方法，也不暴露任何键、值或项目上的迭代器</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> m <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> WeakMap();
+
+<span style="color:#080;font-weight:bold">var</span> x <span style="color:#333">=</span> {id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">1</span>},
+    y <span style="color:#333">=</span> {id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">2</span>};
+
+m.set(x, <span style="background-color:#fff0f0">&#34;foo&#34;</span>); <span style="color:#888">// WeakMap { [items unknown] }
+</span><span style="color:#888"></span>m.set(y, <span style="background-color:#fff0f0">&#34;bar&#34;</span>); <span style="color:#888">// WeakMap { [items unknown] }
+</span><span style="color:#888"></span>
+m.has(x);
+m.size; <span style="color:#888">// undefined
+</span><span style="color:#888"></span>m.clear; <span style="color:#888">// undefined
+</span></code></pre></div>
+<h4 id="set">Set</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> s <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Set();
+
+<span style="color:#080;font-weight:bold">var</span> x <span style="color:#333">=</span> {id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">1</span>},
+    y <span style="color:#333">=</span> {id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">2</span>};
+
+s.add(x);
+s.add(y);
+s.add(x);
+
+s.size; <span style="color:#888">// 2
+</span><span style="color:#888"></span>s.<span style="color:#080;font-weight:bold">delete</span>(y); <span style="color:#888">// true
+</span><span style="color:#888"></span>s.size; <span style="color:#888">// 1
+</span><span style="color:#888"></span>s.clear(); 
+s.size; <span style="color:#888">// 0
+</span><span style="color:#888"></span>
+<span style="color:#080;font-weight:bold">var</span> s2 <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Set([x, y]);
+s2.has(x); <span style="color:#888">// false
+</span><span style="color:#888"></span>
+<span style="color:#888">// Set 迭代器
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">var</span> keys <span style="color:#333">=</span> [...s2.keys()],
+    vals <span style="color:#333">=</span> [...s2.values()],
+    entries <span style="color:#333">=</span> [...s2.entries()];
+
+keys[<span style="color:#00d;font-weight:bold">0</span>] <span style="color:#333">===</span> x; <span style="color:#888">// true
+</span><span style="color:#888"></span>vals[<span style="color:#00d;font-weight:bold">0</span>] <span style="color:#333">===</span> x; <span style="color:#888">// true
+</span><span style="color:#888"></span>
+entries[<span style="color:#00d;font-weight:bold">0</span>][<span style="color:#00d;font-weight:bold">0</span>] <span style="color:#333">===</span> x; <span style="color:#888">// true
+</span></code></pre></div>
+<h4 id="weakset">WeakSet</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> s <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> WeakSet();
+
+<span style="color:#080;font-weight:bold">var</span> x <span style="color:#333">=</span> {id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">1</span>},
+    y <span style="color:#333">=</span> {id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">2</span>};
+
+s.add(x);
+s.add(y);
+
+x <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">null</span>; <span style="color:#888">// x 可 GC
+</span></code></pre></div>
+<h2 id="新增-api">新增 API</h2>
+
+<h3 id="array">Array</h3>
+
+<h4 id="静态函数-array-of">静态函数 Array.of</h4>
+
+<p>使用场景：</p>
+
+<ul>
+<li>回调函数需要传入的参数封装为数组</li>
+<li>构建 Array 子类，并且想要你的子类实例中创建和初始化元素</li>
+</ul>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> a <span style="color:#333">=</span> <span style="color:#007020">Array</span>(<span style="color:#00d;font-weight:bold">3</span>);
+a.length;
+
+<span style="color:#080;font-weight:bold">var</span> b <span style="color:#333">=</span> <span style="color:#007020">Array</span>.<span style="color:#080;font-weight:bold">of</span>(<span style="color:#00d;font-weight:bold">3</span>);
+b.length;
+b[<span style="color:#00d;font-weight:bold">0</span>];
+
+<span style="color:#080;font-weight:bold">var</span> c <span style="color:#333">=</span> <span style="color:#007020">Array</span>.<span style="color:#080;font-weight:bold">of</span>(<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>);
+c.length; 
+c;
+
+<span style="color:#080;font-weight:bold">class</span> MyCoolArray <span style="color:#080;font-weight:bold">extends</span> <span style="color:#007020">Array</span>{
+  sum(){
+    <span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">this</span>.reduce(<span style="color:#080;font-weight:bold">function</span> reduceer(acc, curr){
+      <span style="color:#080;font-weight:bold">return</span> acc <span style="color:#333">+</span> curr;
+    }, <span style="color:#00d;font-weight:bold">0</span>);
+  }
+}
+<span style="color:#080;font-weight:bold">var</span> z <span style="color:#333">=</span>  MyCoolArray.<span style="color:#080;font-weight:bold">of</span>(<span style="color:#00d;font-weight:bold">3</span>);
+z.length;
+z.sum();
+</code></pre></div>
+<h4 id="静态函数-array-from">静态函数 Array.from</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> a <span style="color:#333">=</span> <span style="color:#007020">Array</span>(<span style="color:#00d;font-weight:bold">4</span>); <span style="color:#888">// 4 个空槽位
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">var</span> b <span style="color:#333">=</span> <span style="color:#007020">Array</span>.apply(<span style="color:#080;font-weight:bold">null</span>, {length<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">4</span>}); <span style="color:#888">//  4 个 undefined 值
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">var</span> c <span style="color:#333">=</span> <span style="color:#007020">Array</span>.from({length<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">4</span>}); <span style="color:#888">// 4 个 undefined 值
+</span><span style="color:#888"></span>
+<span style="color:#888">// 映射
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">var</span> arrLike <span style="color:#333">=</span> {
+  length<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">4</span>,
+  <span style="color:#00d;font-weight:bold">2</span><span style="color:#333">:</span> <span style="background-color:#fff0f0">&#34;foo&#34;</span>
+};
+<span style="color:#007020">Array</span>.from(arrLike, <span style="color:#080;font-weight:bold">function</span> mapper(val, idx){
+  <span style="color:#080;font-weight:bold">if</span>(<span style="color:#080;font-weight:bold">typeof</span> val <span style="color:#333">===</span> <span style="background-color:#fff0f0">&#34;string&#34;</span>){
+    <span style="color:#080;font-weight:bold">return</span> val.toUpperCase();
+  }<span style="color:#080;font-weight:bold">else</span>{
+    <span style="color:#080;font-weight:bold">return</span> idx;
+  }
+});
+</code></pre></div>
+<h4 id="原型方法-copywithin">原型方法 copyWithin</h4>
+
+<p>target(复制的索引)、start（开始复制的原索引）和可选的 end（复制结束的索引）</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>, <span style="color:#00d;font-weight:bold">4</span>, <span style="color:#00d;font-weight:bold">5</span>].copyWithin(<span style="color:#00d;font-weight:bold">3</span>, <span style="color:#00d;font-weight:bold">0</span>); <span style="color:#888">// [ 1, 2, 3, 1, 2 ]
+</span><span style="color:#888"></span>[<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>, <span style="color:#00d;font-weight:bold">4</span>, <span style="color:#00d;font-weight:bold">5</span>].copyWithin(<span style="color:#00d;font-weight:bold">3</span>, <span style="color:#00d;font-weight:bold">0</span>, <span style="color:#00d;font-weight:bold">1</span>); <span style="color:#888">// [ 1, 2, 3, 1, 5 ]
+</span><span style="color:#888"></span>[<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>, <span style="color:#00d;font-weight:bold">4</span>, <span style="color:#00d;font-weight:bold">5</span>].copyWithin(<span style="color:#00d;font-weight:bold">0</span>, <span style="color:#333">-</span><span style="color:#00d;font-weight:bold">2</span>); <span style="color:#888">// [ 4, 5, 3, 4, 5 ]
+</span><span style="color:#888"></span>[<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>, <span style="color:#00d;font-weight:bold">4</span>, <span style="color:#00d;font-weight:bold">5</span>].copyWithin(<span style="color:#00d;font-weight:bold">0</span>, <span style="color:#333">-</span><span style="color:#00d;font-weight:bold">2</span>, <span style="color:#333">-</span><span style="color:#00d;font-weight:bold">1</span>); <span style="color:#888">// [ 4, 2, 3, 4, 5 ]
+</span><span style="color:#888">// 复制算法的反向进行
+</span><span style="color:#888">// 4 -&gt; 5, 3 -&gt; 4, 2 -&gt; 3
+</span><span style="color:#888"></span>[<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>, <span style="color:#00d;font-weight:bold">4</span>, <span style="color:#00d;font-weight:bold">5</span>].copyWithin(<span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">1</span>); <span style="color:#888">// [ 1, 2, 2, 3, 4 ]
+</span></code></pre></div>
+<h4 id="原型方法-fill">原型方法 fill</h4>
+
+<p>start和end标识(要填充子集的位置)</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> a <span style="color:#333">=</span> <span style="color:#007020">Array</span>(<span style="color:#00d;font-weight:bold">4</span>).fill(<span style="color:#080;font-weight:bold">undefined</span>);
+a; <span style="color:#888">// [ undefined, undefined, undefined, undefined ]
+</span><span style="color:#888"></span>
+<span style="color:#080;font-weight:bold">var</span> b <span style="color:#333">=</span> [<span style="color:#080;font-weight:bold">null</span>, <span style="color:#080;font-weight:bold">null</span>, <span style="color:#080;font-weight:bold">null</span>, <span style="color:#080;font-weight:bold">null</span>].fill(<span style="color:#00d;font-weight:bold">42</span>, <span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">3</span>);
+b; <span style="color:#888">// [ null, 42, 42, null ]
+</span></code></pre></div>
+<h4 id="原型方法-find">原型方法 find</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> points <span style="color:#333">=</span> [
+  {x<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">10</span>, y<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">20</span>},
+  {x<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">20</span>, y<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">30</span>},
+  {x<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">30</span>, y<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">40</span>},
+  {x<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">50</span>, y<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">60</span>}
+];
+
+points.find(<span style="color:#080;font-weight:bold">function</span> match(point){
+  <span style="color:#080;font-weight:bold">return</span> (
+    point.x <span style="color:#333">%</span> <span style="color:#00d;font-weight:bold">3</span> <span style="color:#333">==</span> <span style="color:#00d;font-weight:bold">0</span> <span style="color:#333">&amp;&amp;</span> point.y <span style="color:#333">%</span> <span style="color:#00d;font-weight:bold">4</span> <span style="color:#333">==</span> <span style="color:#00d;font-weight:bold">0</span>
+  )
+})
+<span style="color:#888">// { x: 30, y: 40 }
+</span></code></pre></div>
+<h4 id="原型方法-findindex">原型方法 findIndex</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> points <span style="color:#333">=</span> [
+  {x<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">10</span>, y<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">20</span>},
+  {x<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">20</span>, y<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">30</span>},
+  {x<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">30</span>, y<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">40</span>},
+  {x<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">50</span>, y<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">60</span>}
+];
+
+points.findIndex(<span style="color:#080;font-weight:bold">function</span> match(point){
+  <span style="color:#080;font-weight:bold">return</span> (
+    point.x <span style="color:#333">%</span> <span style="color:#00d;font-weight:bold">3</span> <span style="color:#333">==</span> <span style="color:#00d;font-weight:bold">0</span> <span style="color:#333">&amp;&amp;</span> point.y <span style="color:#333">%</span> <span style="color:#00d;font-weight:bold">4</span> <span style="color:#333">==</span> <span style="color:#00d;font-weight:bold">0</span>
+  )
+})
+<span style="color:#888">// 2
+</span></code></pre></div>
+<h4 id="原型方法-entries-values-和-keys">原型方法 entries、values 和 keys</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> a <span style="color:#333">=</span> [<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>];
+[...a.values()]; <span style="color:#888">// [ 1, 2, 3 ]
+</span><span style="color:#888"></span>[...a.keys()]; <span style="color:#888">// [ 0, 1, 2 ]
+</span><span style="color:#888"></span>[...a.entries()]; <span style="color:#888">// [ [ 0, 1 ], [ 1, 2 ], [ 2, 3 ] ]
+</span></code></pre></div>
+<h3 id="object">Object</h3>
+
+<h4 id="静态函数-object-is">静态函数 Object.is</h4>
+
+<p>SameValue 算法，与比较 <code>====</code>算法</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> x <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">NaN</span>, y <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">0</span>, z <span style="color:#333">=</span> <span style="color:#333">-</span><span style="color:#00d;font-weight:bold">0</span>;
+x <span style="color:#333">===</span> x; <span style="color:#888">// false
+</span><span style="color:#888"></span>y <span style="color:#333">===</span> z; <span style="color:#888">// true
+</span><span style="color:#888"></span>
+<span style="color:#007020">Object</span>.is(x, x); <span style="color:#888">// true
+</span><span style="color:#888"></span><span style="color:#007020">Object</span>.is(y, x); <span style="color:#888">// false
+</span></code></pre></div>
+<h4 id="静态函数-object-getownpropertysymbols">静态函数 Object.getOwnPropertySymbols</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> o <span style="color:#333">=</span> {
+  foo<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">42</span>,
+  [Symbol(<span style="background-color:#fff0f0">&#34;bar&#34;</span>)]<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#34;hello world&#34;</span>,
+  baz<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">true</span>
+};
+<span style="color:#007020">Object</span>.getOwnPropertySymbols(o);
+</code></pre></div>
+<h4 id="静态函数-object-setprototypeof">静态函数 Object.setPrototypeOf</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> o1 <span style="color:#333">=</span> {
+  foo() {console.log(<span style="background-color:#fff0f0">&#34;foo&#34;</span>);}
+};
+<span style="color:#080;font-weight:bold">var</span> o2 <span style="color:#333">=</span> {};
+<span style="color:#007020">Object</span>.setPrototypeOf(o2, o1); <span style="color:#888">// {}
+</span><span style="color:#888"></span>o2.foo(); <span style="color:#888">// &#39;foo&#39;
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">var</span> o3 <span style="color:#333">=</span> <span style="color:#007020">Object</span>.setPrototypeOf({}, o1); <span style="color:#888">// {}
+</span><span style="color:#888"></span>o3.foo; <span style="color:#888">// &#39;foo&#39;
+</span></code></pre></div>
+<h4 id="静态函数-object-assign">静态函数 Object.assign</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> target <span style="color:#333">=</span> {},
+    o1 <span style="color:#333">=</span> {a<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">1</span>},
+    o2 <span style="color:#333">=</span> {b<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">2</span>},
+    o3 <span style="color:#333">=</span> {c<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">3</span>},
+    o4 <span style="color:#333">=</span> {d<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">4</span>};
+
+<span style="color:#007020">Object</span>.defineProperty(o3, <span style="background-color:#fff0f0">&#34;e&#34;</span>, {
+  value<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">5</span>,
+  enumerable<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">true</span>,
+  writable<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">false</span>,
+  configurable<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">false</span>
+})
+<span style="color:#007020">Object</span>.defineProperty(o3, <span style="background-color:#fff0f0">&#34;f&#34;</span>, {
+  value<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">6</span>,
+  enumerable<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">false</span>
+});
+o3[Symbol(<span style="background-color:#fff0f0">&#34;g&#34;</span>)] <span style="color:#333">=</span>  <span style="color:#00d;font-weight:bold">7</span>;
+<span style="color:#007020">Object</span>.defineProperty(o3, Symbol(<span style="background-color:#fff0f0">&#34;h&#34;</span>), {
+  value<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">8</span>,
+  enumerable<span style="color:#333">:</span> <span style="color:#080;font-weight:bold">false</span>
+});
+
+<span style="color:#007020">Object</span>.setPrototypeOf(o3, o4);
+<span style="color:#007020">Object</span>.assign(target, o1, o2, o3); <span style="color:#888">// { a: 1, b: 2, c: 3, e: 5, [Symbol(g)]: 7 }
+</span><span style="color:#888"></span><span style="color:#007020">Object</span>.getOwnPropertyDescriptor(target, <span style="background-color:#fff0f0">&#34;e&#34;</span>); 
+<span style="color:#888">// { value: 5, writable: true, enumerable: true, configurable: true }
+</span><span style="color:#888"></span><span style="color:#007020">Object</span>.getOwnPropertySymbols(target); <span style="color:#888">// [ Symbol(g) ]
+</span></code></pre></div>
+<h3 id="math">Math</h3>
+
+<ul>
+<li>三角函数：
+
+<ul>
+<li>双余弦函数 - cosh</li>
+<li>双曲反余弦函数 - acosh</li>
+<li>双曲正弦函数 - sinh</li>
+<li>双曲反正弦函数 - asinh</li>
+<li>双曲正切函数 - tanh</li>
+<li>双曲反正切函数 - atanh</li>
+<li>平方和的平方根 hypot</li>
+</ul></li>
+<li>算术
+
+<ul>
+<li>立方根 - cbrt</li>
+<li>计算 32 位二进制表示的前导 0 的个数</li>
+<li>等价于 exp(x)-1 - expm1</li>
+<li>二进制对数 - log2</li>
+<li>以 10 为底的对数 - log10</li>
+<li>等价于 log(x + 1) - log1p</li>
+<li>两个数字的 32 位整数乘法 - imul</li>
+</ul></li>
+<li>元工具
+
+<ul>
+<li>返回数字符号 - sign</li>
+<li>返回数字的整数部分 - trunc</li>
+<li>向最接近的 32 位（单精度）浮点数取整 - fround
+<br /></li>
+</ul></li>
+</ul>
+
+<h3 id="number">Number</h3>
+
+<h4 id="静态属性">静态属性</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#007020">Number</span>.EPSILON <span style="color:#888">// 任意两个数字之间的最小值
+</span><span style="color:#888"></span><span style="color:#007020">Number</span>.MAX_SAFE_INTEGER <span style="color:#888">// 最大整数
+</span><span style="color:#888"></span><span style="color:#007020">Number</span>.MIN_SAFE_INTEGER <span style="color:#888">// 最小整数
+</span></code></pre></div>
+<h4 id="静态函数-number-isnan">静态函数 Number.isNaN</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> a <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">NaN</span>, b <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;NaN&#34;</span>, c <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">42</span>;
+<span style="color:#007020">isNaN</span>(a);  <span style="color:#888">// true
+</span><span style="color:#888"></span><span style="color:#007020">isNaN</span>(b); <span style="color:#888">// true
+</span><span style="color:#888"></span><span style="color:#007020">isNaN</span>(c); <span style="color:#888">// false
+</span><span style="color:#888"></span><span style="color:#007020">Number</span>.<span style="color:#007020">isNaN</span>(a); <span style="color:#888">// true
+</span><span style="color:#888"></span><span style="color:#007020">Number</span>.<span style="color:#007020">isNaN</span>(b); <span style="color:#888">// false
+</span><span style="color:#888"></span><span style="color:#007020">Number</span>.<span style="color:#007020">isNaN</span>(c); <span style="color:#888">// false
+</span></code></pre></div>
+<h4 id="静态函数-number-isfinite">静态函数 Number.isFinite</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> a <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">NaN</span>, b <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">Infinity</span>, c <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">42</span>;
+<span style="color:#007020">Number</span>.<span style="color:#007020">isFinite</span>(a); <span style="color:#888">// false
+</span><span style="color:#888"></span><span style="color:#007020">Number</span>.<span style="color:#007020">isFinite</span>(b); <span style="color:#888">// false
+</span><span style="color:#888"></span><span style="color:#007020">Number</span>.<span style="color:#007020">isFinite</span>(c); <span style="color:#888">// true
+</span><span style="color:#888"></span>
+<span style="color:#080;font-weight:bold">var</span> d <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;42&#34;</span>;
+<span style="color:#007020">isFinite</span>(d); <span style="color:#888">// true
+</span><span style="color:#888"></span><span style="color:#007020">Number</span>.<span style="color:#007020">isFinite</span>(a); <span style="color:#888">// false
+</span></code></pre></div>
+<h4 id="整型相关静态函数">整型相关静态函数</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#007020">Number</span>.isInteger(<span style="color:#00d;font-weight:bold">4</span>); <span style="color:#888">// true
+</span><span style="color:#888"></span><span style="color:#007020">Number</span>.isInteger(<span style="color:#60e;font-weight:bold">4.2</span>); <span style="color:#888">// false
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">var</span> x <span style="color:#333">=</span> <span style="color:#007020">Math</span>.pow(<span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">53</span>),
+    y <span style="color:#333">=</span> <span style="color:#007020">Math</span>.pow(<span style="color:#333">-</span><span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">53</span>);
+
+<span style="color:#007020">Number</span>.<span style="color:#007020">isSafeInteger</span>(x <span style="color:#333">-</span> <span style="color:#00d;font-weight:bold">1</span>); <span style="color:#888">// true
+</span><span style="color:#888"></span><span style="color:#007020">Number</span>.<span style="color:#007020">isSafeInteger</span>(y <span style="color:#333">+</span> <span style="color:#00d;font-weight:bold">1</span>); <span style="color:#888">// true
+</span><span style="color:#888"></span><span style="color:#007020">Number</span>.<span style="color:#007020">isSafeInteger</span>(x); <span style="color:#888">// false
+</span><span style="color:#888"></span><span style="color:#007020">Number</span>.<span style="color:#007020">isSafeInteger</span>(y); <span style="color:#888">// false
+</span></code></pre></div>
+<h3 id="字符串">字符串</h3>
+
+<h4 id="unicode-函数">Unicode 函数</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#007020">String</span>.fromCodePoint(<span style="color:#058;font-weight:bold">0x1d49e</span>); <span style="color:#888">// &#39;𝒞&#39;
+</span><span style="color:#888"></span><span style="background-color:#fff0f0">&#34;ab𝒞d&#34;</span>.codePointAt(<span style="color:#00d;font-weight:bold">2</span>).toString(<span style="color:#00d;font-weight:bold">16</span>);
+<span style="color:#080;font-weight:bold">var</span> s1 <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;e\u0301&#34;</span>;
+s1.length; <span style="color:#888">// 2
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">var</span> s2 <span style="color:#333">=</span> s1.normalize(); 
+s2.length; <span style="color:#888">// 1
+</span><span style="color:#888"></span>s2 <span style="color:#333">===</span> <span style="background-color:#fff0f0">&#34;\xE9&#34;</span>; <span style="color:#888">// true
+</span></code></pre></div>
+<h4 id="静态函数-string-raw">静态函数 String.raw</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> str <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;bc&#34;</span>;
+<span style="color:#007020">String</span>.raw<span style="background-color:#fff0f0">`</span><span style="color:#f00;background-color:#faa">\</span><span style="background-color:#fff0f0">ta$(str)d</span><span style="color:#f00;background-color:#faa">\</span><span style="background-color:#fff0f0">xE9`</span>; <span style="color:#888">// &#39;\ta$(str)d\xE9&#39;
+</span></code></pre></div>
+<h4 id="原型函数-repeat">原型函数 repeat</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="background-color:#fff0f0">&#34;foo&#34;</span>.repeat(<span style="color:#00d;font-weight:bold">3</span>); <span style="color:#888">// &#34;foofoofoo&#34;
+</span></code></pre></div>
+<h4 id="字符串检查函数">字符串检查函数</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">var</span> palindome <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;step on no pets&#34;</span>;
+palindome.startsWith(<span style="background-color:#fff0f0">&#34;step on&#34;</span>); <span style="color:#888">// true
+</span><span style="color:#888"></span>palindome.startsWith(<span style="background-color:#fff0f0">&#34;on&#34;</span>, <span style="color:#00d;font-weight:bold">5</span>); <span style="color:#888">// true
+</span><span style="color:#888"></span>palindome.endsWith(<span style="background-color:#fff0f0">&#34;no pets&#34;</span>); <span style="color:#888">// true
+</span><span style="color:#888"></span>palindome.endsWith(<span style="background-color:#fff0f0">&#34;no pets&#34;</span>, <span style="color:#00d;font-weight:bold">10</span>); <span style="color:#888">// false
+</span><span style="color:#888"></span>palindome.includes(<span style="background-color:#fff0f0">&#34;on&#34;</span>); <span style="color:#888">// true
+</span><span style="color:#888"></span>palindome.includes(<span style="background-color:#fff0f0">&#34;on&#34;</span>, <span style="color:#00d;font-weight:bold">6</span>); <span style="color:#888">// false
+</span></code></pre></div>
 
     <script>
         let colNum = document.querySelector("#sheet_column").innerText;
@@ -497,6 +1287,18 @@ See: <a href="https://babeljs.io/learn-es2015/#iterators--forof">For..of iterati
         Array.prototype.max = function () {
             return Math.max.apply(null, this);
         };
+        Array.prototype.minindex = function (col) {
+            let _index = 0,
+                min = this[0];
+            for (var i = 1; i < col; i++) {
+                if (min > this[i]) {
+                    min = this[i];
+                    _index = i;
+                }
+            }
+            return _index;
+        };
+
 
         for (let key in sheetBox.children) {
             eleList.push(sheetBox.children[key]);
@@ -550,7 +1352,7 @@ See: <a href="https://babeljs.io/learn-es2015/#iterators--forof">For..of iterati
                     }
                 }
                 es.forEach((e, i) => {
-                    let _colOrder = i % col;
+                    let _colOrder = _hs.minindex(col);
                     e.style.left = _colOrder * _e_offset + 'px';
                     e.style.top = _hs[_colOrder] + 'px';
                     e.style.width = (_w - (col - 1) * _w * 0.012) / col + 'px';

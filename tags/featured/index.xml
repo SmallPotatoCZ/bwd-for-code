@@ -5,6 +5,7 @@
     <link>https://bwd.zhangchao.online/tags/featured/</link>
     <description>Recent content in featured on EsilyZhang 的备忘单</description>
     <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 10 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://bwd.zhangchao.online/tags/featured/index.xml" rel="self" type="application/rss+xml" />
     
@@ -19,13 +20,33 @@
     </item>
     
     <item>
+      <title>JavaScript 基础知识</title>
+      <link>https://bwd.zhangchao.online/javascript/basic/</link>
+      <pubDate>Wed, 10 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://bwd.zhangchao.online/javascript/basic/</guid>
+      <description> 基本值和类型 值有类型，但变量无类型
+内置类型：
+ 字符串（string） 数字（number） 布尔值（boolean） null 和 undefined 对象（object） 符号（symbol）  typeof typeof &amp;#34;helloworld&amp;#34;; // string typeof 10; // number typeof true; // bollean typeof null; // object typeof a; // undefined typeof []; // object typeof Symbol(&amp;#34;a&amp;#34;); // symbol typeof function(){}; // function  内置子对象 Array </description>
+    </item>
+    
+    <item>
       <title>ES2015&#43;</title>
       <link>https://bwd.zhangchao.online/javascript/es6/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://bwd.zhangchao.online/javascript/es6/</guid>
-      <description>Scope Block scoping Let function fn () { let x = 0 if (true) { let x = 1 // only inside this `if`  } }  Const const a = 1  let is the new var. Constants work just like let, but can&amp;rsquo;t be reassigned. See: Let and const
-Backtick strings Interpolation const message = `Hello ${name}`  Multiline strings const str = ` hello world `  Templates and multiline strings.</description>
+      <description>语法 块作用域声明 let var a = 2; { let a = 3; console.log(&amp;#34;块作用域&amp;#34;, a); } console.log(&amp;#34;函数作用域&amp;#34;, a);  const { const a = 2; console.log(a); // 2  a = 3; // TypeError } // 常量不是对这个值本身的限制，而是对赋值的哪个变量的限制 { const a = [1, 2, 3]; a.push(4); console.log(a); // [1, 2, 3, 4]  a = 42; // TypeError }  块作用域函数 { foo(); function foo(){} } foo(); // ReferenceError  spread/rest spread function foo(a, b, c){ console.</description>
+    </item>
+    
+    <item>
+      <title>JavaScript 面试题</title>
+      <link>https://bwd.zhangchao.online/interview-question/javascript/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bwd.zhangchao.online/interview-question/javascript/</guid>
+      <description>JavaScript 修改以下 print 函数，使之输出 0 到 99，或者 99 到 0  只能修改 setTimeout 到 Math.floor(Math.random() * 1000 的代码 不能修改 Math.floor(Math.random() * 1000 不能使用全局变量  代码 function print(n){ setTimeout(() =&amp;gt; { console.log(n); }, Math.floor(Math.random() * 1000)); } for(var i = 0; i &amp;lt; 100; i++){ print(i); }  关键 将输出执行脱离异步定时器，变为立即执行。
+答案 function print(n){ setTimeout((() =&amp;gt; { console.log(n); return null; })(), Math.floor(Math.random() * 1000)); } for(var i = 0; i &amp;lt; 100; i++){ print(i); }  请写出如下代码的打印结果 代码 function Foo() { Foo.</description>
     </item>
     
     <item>
@@ -45,6 +66,24 @@ Variables $red: #833;body { color: $red; } Nesting .markdown-body { p { color: b
       
       <guid>https://bwd.zhangchao.online/apps/vscode/</guid>
       <description>Shortcuts Command palette    Key Description     ⇧⌘P Show all commands   ⇧⌘P Show all commands   ⌘P Show files    Sidebars    Key Description     ⌘B Toggle sidebar   ⇧⌘E Explorer   ⇧⌘F Search   ⇧⌘D Debug   ⇧⌘X Extensions   ⇧^G Git (SCM)    Search    Key Description     ⌘F Find   ⌥⌘F Replace   ⇧⌘F Find in files   ⇧⌘H Replace in files    Panel    Key Description     ⌘J Toggle panel   ⇧⌘M Problems   ⇧⌘U Output   ⇧⌘Y Debug console   ^` Terminal    View    Key Description     ⌘k z Zen mode   ⌘k u Close unmodified   ⌘k w Close all    Debug    Key Description     F5 Start   ⇧F5 Stop   ⇧⌘F5 Restart   ^F5 Start without debugging   F9 Toggle breakpoint   F10 Step over   F11 Step into   ⇧F11 Step out   ⇧⌘D Debug sidebar   ⇧⌘Y Debug panel    References  Keyboard shortcuts (MacOS) (code.</description>
+    </item>
+    
+    <item>
+      <title>Web 通用知识面试题</title>
+      <link>https://bwd.zhangchao.online/interview-question/web/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bwd.zhangchao.online/interview-question/web/</guid>
+      <description> 安全 介绍下前端加密的常见场景和方法 协议 介绍下 HTTPS 中间人攻击 </description>
+    </item>
+    
+    <item>
+      <title>sql 常用语句</title>
+      <link>https://bwd.zhangchao.online/database/mysql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bwd.zhangchao.online/database/mysql/</guid>
+      <description>简单的 SQL 查询 数据库 // 查看所有数据库 show databses; // 进入数据库 use $databasename; 数据库中的表 // 查看数据库中表的列表 show tables; // 查看指定表格的内容 select * from $tablename; // 只显示指定列的数据 select $name from $tablename; // 显示多列的数据 select $name1,$name2 from $tablename; // 限制显示数据 select * from $tablename limit $num; // 通过指定字符串过滤结果,% 是通配符（左右） select * from $tablename where $name like $string%; Sql 进阶 查询 // 根据给定字符串，过滤结果 select * from $tablename where $name like &amp;#34;%mike%&amp;#34;; // 严格模式 select * from $tablename where $name=&amp;#34;$string&amp;#34;; // 根据范围查询 select * from $tablename where $name between $start and $end; // 排序 select * from $tablename order by $name; // 降序 select * from $tablename order by $name DESC; // 组合 select * from $tablename order by $name DESC limit $num; // 根表1中的某个值和对应的表2中的某个值，查询结果 select * from $tablename1 join $tablename2 on $tablename1.</description>
     </item>
     
   </channel>

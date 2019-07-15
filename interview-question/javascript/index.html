@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<link href='/favicon.png' rel='shortcut icon'>
+<meta content='' name='app:pageurl'>
+
+
+
+
+
+
+
+<link rel="canonical" href="">
+<meta name="og:url" content="">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <title>EsilyZhang 的备忘单</title>
+    
+    <link rel="stylesheet" href="/sass/main.min.97ef104245886f62f208a3f927e5b782e9ca7977a33f55b30e5f46e415c7372b.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+
+<link rel="stylesheet" href="/sass/markdown.min.fab29f2a847a663f96443fcaa4719dab072d38a345a61cd879a9641226c35a75.css">
+
+</head>
+
+<body>
+    <header role="heading">
+        <nav class='top-nav' data-js-no-preview role='navigation'>
+    <div class='container'>
+        
+        <div class='left'>
+            <a class='back-button icons' href='/'>keyboard_backspace</a>
+        </div>
+        
+
+        <a class='brand' href='/'>
+            EsilyZhang 的备忘单
+        </a>
+    </div>
+</nav>
+    </header>
+    <main role="main">
+        
+<div class='site-header' role='banner'>
+    <h1>
+        JavaScript 面试题 - 备忘录
+    </h1>
+</div>
+<div class="md_content">
+    <div id="sheet_box">
+    <div id="sheet_column" hidden>2</div>
+    
+
+<h2 id="javascript">JavaScript</h2>
+
+<h3 id="修改以下-print-函数-使之输出-0-到-99-或者-99-到-0">修改以下 print 函数，使之输出 0 到 99，或者 99 到 0</h3>
+
+<ol>
+<li>只能修改 setTimeout 到 Math.floor(Math.random() * 1000 的代码</li>
+<li>不能修改 Math.floor(Math.random() * 1000</li>
+<li>不能使用全局变量</li>
+</ol>
+
+<h4 id="代码">代码</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> print(n){
+  setTimeout(() =&gt; {
+    console.log(n);
+  }, <span style="color:#007020">Math</span>.floor(<span style="color:#007020">Math</span>.random() <span style="color:#333">*</span> <span style="color:#00d;font-weight:bold">1000</span>));
+}
+<span style="color:#080;font-weight:bold">for</span>(<span style="color:#080;font-weight:bold">var</span> i <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">0</span>; i <span style="color:#333">&lt;</span> <span style="color:#00d;font-weight:bold">100</span>; i<span style="color:#333">++</span>){
+  print(i);
+}
+</code></pre></div>
+<h4 id="关键">关键</h4>
+
+<p>将输出执行脱离异步定时器，变为立即执行。</p>
+
+<h4 id="答案">答案</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> print(n){
+  setTimeout((() =&gt; {
+    console.log(n);
+    <span style="color:#080;font-weight:bold">return</span> <span style="color:#080;font-weight:bold">null</span>;
+  })(), <span style="color:#007020">Math</span>.floor(<span style="color:#007020">Math</span>.random() <span style="color:#333">*</span> <span style="color:#00d;font-weight:bold">1000</span>));
+}
+<span style="color:#080;font-weight:bold">for</span>(<span style="color:#080;font-weight:bold">var</span> i <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">0</span>; i <span style="color:#333">&lt;</span> <span style="color:#00d;font-weight:bold">100</span>; i<span style="color:#333">++</span>){
+  print(i);
+}
+</code></pre></div>
+<h3 id="请写出如下代码的打印结果">请写出如下代码的打印结果</h3>
+
+<h4 id="代码-1">代码</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> Foo() {
+    Foo.a <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">function</span>() {
+        console.log(<span style="color:#00d;font-weight:bold">1</span>)
+    }
+    <span style="color:#080;font-weight:bold">this</span>.a <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">function</span>() {
+        console.log(<span style="color:#00d;font-weight:bold">2</span>)
+    }
+}
+Foo.prototype.a <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">function</span>() {
+    console.log(<span style="color:#00d;font-weight:bold">3</span>)
+}
+Foo.a <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">function</span>() {
+    console.log(<span style="color:#00d;font-weight:bold">4</span>)
+}
+Foo.a();
+<span style="color:#080;font-weight:bold">let</span> obj <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> Foo();
+obj.a();
+Foo.a();
+</code></pre></div>
+<h4 id="关键-1">关键</h4>
+
+<p>函数就是对象；对象属性访问[[Get]]；new 关键字，新建对象；</p>
+
+<h4 id="答案-1">答案</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#888">// 4
+</span><span style="color:#888">// 2
+</span><span style="color:#888">// 1
+</span></code></pre></div>
+<h3 id="用-javascript-写一个函数-输入-int-型-返回整数逆序后的字符串-如-输入整型-1234-返回字符串-4321">用 JavaScript 写一个函数，输入 int 型，返回整数逆序后的字符串。如：输入整型 1234，返回字符串“4321”。</h3>
+
+<h4 id="要求">要求</h4>
+
+<ol>
+<li>要求必须使用递归函数调用</li>
+<li>不能用全局变量</li>
+<li>输入函数必须只有一个参数传入，必须返回字符串</li>
+</ol>
+
+<h4 id="答案-2">答案</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">(<span style="color:#080;font-weight:bold">function</span> reverseNumToStr(num){
+  <span style="color:#080;font-weight:bold">if</span>(num <span style="color:#333">&lt;</span> <span style="color:#00d;font-weight:bold">10</span>){
+    <span style="color:#080;font-weight:bold">return</span> num;
+  }<span style="color:#080;font-weight:bold">else</span>{
+    <span style="color:#080;font-weight:bold">return</span> <span style="background-color:#fff0f0">&#34;&#34;</span> <span style="color:#333">+</span> num <span style="color:#333">%</span> <span style="color:#00d;font-weight:bold">10</span> <span style="color:#333">+</span> reverseNumToStr(<span style="color:#007020">Math</span>.floor(num <span style="color:#333">/</span> <span style="color:#00d;font-weight:bold">10</span>));    
+  }
+}(<span style="color:#00d;font-weight:bold">123456789</span>))
+</code></pre></div>
+<h3 id="代码的打印结果">代码的打印结果</h3>
+
+<h4 id="代码-2">代码</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">function</span> changeObjProperty(o) {
+  o.siteUrl <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;http://www.baidu.com&#34;</span>
+  o <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> <span style="color:#007020">Object</span>()
+  o.siteUrl <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;http://www.google.com&#34;</span>
+} 
+<span style="color:#080;font-weight:bold">let</span> webSite <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">new</span> <span style="color:#007020">Object</span>();
+changeObjProperty(webSite);
+console.log(webSite.siteUrl);
+</code></pre></div>
+<h4 id="关键-2">关键</h4>
+
+<p>new Object()；非基本数据类型的数据引用；函数的参数变量；</p>
+
+<h4 id="答案-3">答案</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#888">// &#34;http://www.baidu.com&#34;
+</span></code></pre></div>
+<h3 id="输出以下代码运行结果">输出以下代码运行结果</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#888">// example 1
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">var</span> a<span style="color:#333">=</span>{}, b<span style="color:#333">=</span><span style="background-color:#fff0f0">&#39;123&#39;</span>, c<span style="color:#333">=</span><span style="color:#00d;font-weight:bold">123</span>;  
+a[b]<span style="color:#333">=</span><span style="background-color:#fff0f0">&#39;b&#39;</span>;
+a[c]<span style="color:#333">=</span><span style="background-color:#fff0f0">&#39;c&#39;</span>;  
+console.log(a[b]);
+
+<span style="color:#333">---------------------</span>
+<span style="color:#888">// example 2
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">var</span> a<span style="color:#333">=</span>{}, b<span style="color:#333">=</span>Symbol(<span style="background-color:#fff0f0">&#39;123&#39;</span>), c<span style="color:#333">=</span>Symbol(<span style="background-color:#fff0f0">&#39;123&#39;</span>);  
+a[b]<span style="color:#333">=</span><span style="background-color:#fff0f0">&#39;b&#39;</span>;
+a[c]<span style="color:#333">=</span><span style="background-color:#fff0f0">&#39;c&#39;</span>;  
+console.log(a[b]);
+
+<span style="color:#333">---------------------</span>
+<span style="color:#888">// example 3
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">var</span> a<span style="color:#333">=</span>{}, b<span style="color:#333">=</span>{key<span style="color:#333">:</span><span style="background-color:#fff0f0">&#39;123&#39;</span>}, c<span style="color:#333">=</span>{key<span style="color:#333">:</span><span style="background-color:#fff0f0">&#39;456&#39;</span>};  
+a[b]<span style="color:#333">=</span><span style="background-color:#fff0f0">&#39;b&#39;</span>;
+a[c]<span style="color:#333">=</span><span style="background-color:#fff0f0">&#39;c&#39;</span>;  
+console.log(a[b]);
+</code></pre></div>
+<h3 id="模拟实现一个深拷贝-并考虑对象相互引用以及-symbol-拷贝的情况">模拟实现一个深拷贝，并考虑对象相互引用以及 Symbol 拷贝的情况</h3>
+
+<h3 id="给定两个大小为-m-和-n-的有序数组-nums1-和-nums2-请找出这两个有序数组的中位数-要求算法的时间复杂度为-o-log-m-n">给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。请找出这两个有序数组的中位数。要求算法的时间复杂度为 O(log(m+n))。</h3>
+
+<h4 id="试题">试题</h4>
+
+<p>示例 1：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">nums1 <span style="color:#333">=</span> [<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">3</span>]
+nums2 <span style="color:#333">=</span> [<span style="color:#00d;font-weight:bold">2</span>]
+</code></pre></div>
+<p>中位数是 2.0</p>
+
+<p>示例 2：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">nums1 <span style="color:#333">=</span> [<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>]
+nums2 <span style="color:#333">=</span> [<span style="color:#00d;font-weight:bold">3</span>, <span style="color:#00d;font-weight:bold">4</span>]
+</code></pre></div>
+<p>中位数是 <code>(2+3)/2 = 2.5</code></p>
+
+<h3 id="已知数据格式-实现一个函数-fn-找出链条中所有的父级-id">已知数据格式，实现一个函数 fn 找出链条中所有的父级 id</h3>
+
+<h4 id="试题-1">试题</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">const</span> data <span style="color:#333">=</span> [
+    {
+        id<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#34;1&#34;</span>,
+        name<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#34;广东省&#34;</span>,
+        children<span style="color:#333">:</span>[
+            {
+                id<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#34;11&#34;</span>,
+                name<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#34;深圳市&#34;</span>,
+                children<span style="color:#333">:</span> [
+                    {
+                        id<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#34;111&#34;</span>,
+                        name<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#34;南山区&#34;</span>
+                    },
+                    {
+                        id<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#34;111&#34;</span>,
+                        name<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#34;南山区&#34;</span>
+                    }
+                ]
+            }
+        ]
+    }
+];
+
+<span style="color:#080;font-weight:bold">const</span> value <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;112&#34;</span>;
+<span style="color:#080;font-weight:bold">const</span> fn <span style="color:#333">=</span> (value) =&gt;{
+    <span style="color:#888">// ...
+</span><span style="color:#888"></span>};
+
+fn(value) <span style="color:#888">// 输出 [1, 11, 112]
+</span></code></pre></div>
+<h3 id="设计并实现-promise-race">设计并实现 Promise.race()</h3>
+
+<h3 id="实现-convert-方法-把原始-list-转换成树形结构-要求尽可能降低时间复杂度">实现 convert 方法，把原始 list 转换成树形结构，要求尽可能降低时间复杂度</h3>
+
+<p>以下数据结构中，id 代表部门编号，name 是部门名称，parentId 是父部门编号，为 0 代表一级部门，现在要求实现一个 convert 方法，把原始 list 转换成树形结构，parentId 为多少就挂载在该 id 的属性 children 数组下，结构如下：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#888">// 原始 list 如下
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">let</span> list <span style="color:#333">=</span>[
+    {id<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">1</span>,name<span style="color:#333">:</span><span style="background-color:#fff0f0">&#39;部门A&#39;</span>,parentId<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">0</span>},
+    {id<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">2</span>,name<span style="color:#333">:</span><span style="background-color:#fff0f0">&#39;部门B&#39;</span>,parentId<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">0</span>},
+    {id<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">3</span>,name<span style="color:#333">:</span><span style="background-color:#fff0f0">&#39;部门C&#39;</span>,parentId<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">1</span>},
+    {id<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">4</span>,name<span style="color:#333">:</span><span style="background-color:#fff0f0">&#39;部门D&#39;</span>,parentId<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">1</span>},
+    {id<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">5</span>,name<span style="color:#333">:</span><span style="background-color:#fff0f0">&#39;部门E&#39;</span>,parentId<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">2</span>},
+    {id<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">6</span>,name<span style="color:#333">:</span><span style="background-color:#fff0f0">&#39;部门F&#39;</span>,parentId<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">3</span>},
+    {id<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">7</span>,name<span style="color:#333">:</span><span style="background-color:#fff0f0">&#39;部门G&#39;</span>,parentId<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">2</span>},
+    {id<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">8</span>,name<span style="color:#333">:</span><span style="background-color:#fff0f0">&#39;部门H&#39;</span>,parentId<span style="color:#333">:</span><span style="color:#00d;font-weight:bold">4</span>}
+];
+<span style="color:#080;font-weight:bold">const</span> result <span style="color:#333">=</span> convert(list, ...);
+
+<span style="color:#888">// 转换后的结果如下
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">let</span> result <span style="color:#333">=</span> [
+    {
+      id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">1</span>,
+      name<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#39;部门A&#39;</span>,
+      parentId<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">0</span>,
+      children<span style="color:#333">:</span> [
+        {
+          id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">3</span>,
+          name<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#39;部门C&#39;</span>,
+          parentId<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">1</span>,
+          children<span style="color:#333">:</span> [
+            {
+              id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">6</span>,
+              name<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#39;部门F&#39;</span>,
+              parentId<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">3</span>
+            }, {
+              id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">16</span>,
+              name<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#39;部门L&#39;</span>,
+              parentId<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">3</span>
+            }
+          ]
+        },
+        {
+          id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">4</span>,
+          name<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#39;部门D&#39;</span>,
+          parentId<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">1</span>,
+          children<span style="color:#333">:</span> [
+            {
+              id<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">8</span>,
+              name<span style="color:#333">:</span> <span style="background-color:#fff0f0">&#39;部门H&#39;</span>,
+              parentId<span style="color:#333">:</span> <span style="color:#00d;font-weight:bold">4</span>
+            }
+          ]
+        }
+      ]
+    },
+  <span style="color:#f00;background-color:#faa">···</span>
+];
+</code></pre></div>
+<h3 id="周一算法题之-两数之和">周一算法题之「两数之和」</h3>
+
+<p>给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。示例：</p>
+
+<blockquote>
+<p>给定 nums = [2, 7, 11, 15], target = 9</p>
+
+<p>因为 nums[0] + nums[1] = 2 + 7 = 9</p>
+
+<p>所以返回 [0, 1]</p>
+</blockquote>
+
+<h3 id="周一算法题之-移动零">周一算法题之「移动零」</h3>
+
+<h4 id="试题-2">试题</h4>
+
+<p>给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
+
+<p>示例:</p>
+
+<blockquote>
+<p>输入: [0,1,0,3,12]</p>
+
+<p>输出: [1,3,12,0,0]</p>
+</blockquote>
+
+<p>说明:</p>
+
+<p>必须在原数组上操作，不能拷贝额外的数组。</p>
+
+<p>尽量减少操作次数。</p>
+
+<h3 id="请实现一个-add-函数-满足以下功能">请实现一个 add 函数，满足以下功能</h3>
+
+<h4 id="试题-3">试题</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">add(<span style="color:#00d;font-weight:bold">1</span>); 			<span style="color:#888">// 1
+</span><span style="color:#888"></span>add(<span style="color:#00d;font-weight:bold">1</span>)(<span style="color:#00d;font-weight:bold">2</span>);  	<span style="color:#888">// 3
+</span><span style="color:#888"></span>add(<span style="color:#00d;font-weight:bold">1</span>)(<span style="color:#00d;font-weight:bold">2</span>)(<span style="color:#00d;font-weight:bold">3</span>)<span style="color:#f00;background-color:#faa">；</span><span style="color:#888">// 6
+</span><span style="color:#888"></span>add(<span style="color:#00d;font-weight:bold">1</span>)(<span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>); <span style="color:#888">// 6
+</span><span style="color:#888"></span>add(<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>)(<span style="color:#00d;font-weight:bold">3</span>); <span style="color:#888">// 6
+</span><span style="color:#888"></span>add(<span style="color:#00d;font-weight:bold">1</span>, <span style="color:#00d;font-weight:bold">2</span>, <span style="color:#00d;font-weight:bold">3</span>); <span style="color:#888">// 6
+</span></code></pre></div>
+<h3 id="var-let-和-const-区别的实现原理是什么">var、let 和 const 区别的实现原理是什么</h3>
+
+<h3 id="打印出-1-10000-之间的所有对称数">打印出 1 - 10000 之间的所有对称数</h3>
+
+<h4 id="试题-4">试题</h4>
+
+<p>例如：121、1331 等</p>
+
+<h3 id="介绍下-promise-all-使用-原理实现及错误处理">介绍下 Promise.all 使用、原理实现及错误处理</h3>
+
+<h3 id="算法题-旋转数组">算法题「旋转数组」</h3>
+
+<h4 id="试题-5">试题</h4>
+
+<p>给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。</p>
+
+<p>示例 1：</p>
+
+<blockquote>
+<p>输入: [1, 2, 3, 4, 5, 6, 7] 和 k = 3</p>
+
+<p>输出: [5, 6, 7, 1, 2, 3, 4]</p>
+
+<p>解释:</p>
+
+<p>向右旋转 1 步: [7, 1, 2, 3, 4, 5, 6]</p>
+
+<p>向右旋转 2 步: [6, 7, 1, 2, 3, 4, 5]</p>
+
+<p>向右旋转 3 步: [5, 6, 7, 1, 2, 3, 4]</p>
+</blockquote>
+
+<p>示例 2：</p>
+
+<blockquote>
+<p>输入: [-1, -100, 3, 99] 和 k = 2</p>
+
+<p>输出: [3, 99, -1, -100]</p>
+
+<p>解释:</p>
+
+<p>向右旋转 1 步: [99, -1, -100, 3]</p>
+
+<p>向右旋转 2 步: [3, 99, -1, -100]</p>
+</blockquote>
+
+<h3 id="数组里面有10万个数据-取第一个元素和第10万个元素的时间相差多少">数组里面有10万个数据，取第一个元素和第10万个元素的时间相差多少</h3>
+
+<h3 id="使用-javascript-proxy-实现简单的数据绑定">使用 JavaScript Proxy 实现简单的数据绑定</h3>
+
+<h2 id="框架">框架</h2>
+
+<h3 id="react-和-vue-的-diff-时间复杂度从-o-n-3-优化到-o-n-那么-o-n-3-和-o-n-是如何计算出来的">React 和 Vue 的 diff 时间复杂度从 O(n^3) 优化到 O(n) ，那么 O(n^3) 和 O(n) 是如何计算出来的？</h3>
+
+<h3 id="vue-在-v-for-时给每项元素绑定事件需要用事件代理吗-为什么">vue 在 v-for 时给每项元素绑定事件需要用事件代理吗？为什么？</h3>
+
+<h3 id="react-router-里的-link-标签和-a-标签有什么区别">react-router 里的 <code>&lt;Link&gt;</code> 标签和 <code>&lt;a&gt;</code> 标签有什么区别</h3>
+
+<h4 id="试题-6">试题</h4>
+
+<p>如何禁掉 <a> 标签默认事件，禁掉之后如何实现跳转。</p>
+
+<h3 id="vue-的父组件和子组件生命周期钩子执行顺序是什么">Vue 的父组件和子组件生命周期钩子执行顺序是什么</h3>
+
+<h2 id="综合">综合</h2>
+
+<h3 id="实现模糊搜索结果的关键词高亮显示">实现模糊搜索结果的关键词高亮显示</h3>
+
+<h4 id="试题-7">试题</h4>
+
+<p><img src="https://camo.githubusercontent.com/04b42514c38adb9e853c08f5d32b5dfa223f85ae/68747470733a2f2f7773332e73696e61696d672e636e2f6c617267652f303036744e6337396c793167343364796b616363756a333075303168633439732e6a7067" alt="查询" /></p>
+
+<h3 id="在输入框中如何判断输入的是一个正确的网址">在输入框中如何判断输入的是一个正确的网址</h3>
+
+<h3 id="input-搜索如何防抖-如何处理中文输入">input 搜索如何防抖，如何处理中文输入</h3>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ol>
+<li><a href="https://github.com/Advanced-Frontend/Daily-Interview-Question">Daily-Interview-Question</a></li>
+</ol>
+
+
+    <script>
+        let colNum = document.querySelector("#sheet_column").innerText;
+        const sheetBox = document.body.querySelector("#sheet_box");
+        let eleList = [];
+        Array.prototype.max = function () {
+            return Math.max.apply(null, this);
+        };
+        Array.prototype.minindex = function (col) {
+            let _index = 0,
+                min = this[0];
+            for (var i = 1; i < col; i++) {
+                if (min > this[i]) {
+                    min = this[i];
+                    _index = i;
+                }
+            }
+            return _index;
+        };
+
+
+        for (let key in sheetBox.children) {
+            eleList.push(sheetBox.children[key]);
+        }
+        let _section, _wrap, _x = 0,
+            _y = 0;
+        eleList.forEach(ele => {
+            if (ele.localName === "h2") {
+                _section = document.createElement("div");
+                _wrap = document.createElement("div");
+                _wrap.className = "h3_wrap";
+                _section.className = "h2_section";
+                _section.appendChild(ele);
+                sheetBox.appendChild(_section);
+                sheetBox.appendChild(_wrap);
+                _x = 0;
+                _y = 0;
+            }
+            if (ele.localName === "h3") {
+                _section = document.createElement("div");
+                _section.className = "h3_section";
+                if (!_wrap) {
+                    _wrap = document.createElement("div");
+                    _wrap.className = "h3_wrap";
+                }
+                if (colNum === "2") {
+                    _section.style.width = "49.4%";
+                } else {
+                    _section.style.width = "32.8%";
+                }
+                _section.appendChild(ele);
+                _wrap.appendChild(_section);
+            }
+            if (_section && ele.localName && ele.localName !== "script") {
+                _section.appendChild(ele);
+            }
+        });
+
+        function layout(col, _onlyChangeWidth) {
+            let _w = sheetBox.offsetWidth;
+            const _tars = sheetBox.querySelectorAll(".h3_wrap");
+            let _e_offset = _w * 1.012 / col;
+
+            _tars.forEach(t => {
+                let _hs = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+                let es = [];
+                let _h3_wrap_height = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+                for (let key in t.children) {
+                    if (t.children[key].localName) {
+                        es.push(t.children[key]);
+                    }
+                }
+                es.forEach((e, i) => {
+                    let _colOrder = _hs.minindex(col);
+                    e.style.left = _colOrder * _e_offset + 'px';
+                    e.style.top = _hs[_colOrder] + 'px';
+                    e.style.width = (_w - (col - 1) * _w * 0.012) / col + 'px';
+                    _hs[_colOrder] += e.offsetHeight + 8;
+                    _h3_wrap_height[_colOrder] += e.offsetHeight + 8;
+
+                })
+                t.style.height = _h3_wrap_height.max() + 'px';
+            })
+        }
+
+        colNum = Number(colNum) ? Number(colNum) : 3;
+        let _colCounter;
+        if (window.innerWidth > 768) {
+            _colCounter = colNum;
+        } else if (window.innerWidth > 480) {
+            _colCounter = colNum - 1 <= 0 ? colNum : colNum - 1;
+        } else {
+            _colCounter = colNum - 2 <= 0 ? colNum - 1 <= 0 ? colNum : colNum - 1 : colNum - 2;
+        }
+        layout(_colCounter);
+        window.onresize = function () {
+            let _cols;
+            if (window.innerWidth >= 768) {
+                _cols = colNum;
+            } else if (window.innerWidth > 480) {
+                _cols = colNum - 1 <= 0 ? colNum : colNum - 1;
+            } else {
+                _cols = colNum - 2 <= 0 ? colNum - 1 <= 0 ? colNum : colNum - 1 : colNum - 2;
+            }
+            layout(_cols);
+        }
+    </script>
+</div>
+</div>
+
+    </main>
+
+    <footer>
+        
+        
+        
+    </footer>
+
+</body>
+
+</html>

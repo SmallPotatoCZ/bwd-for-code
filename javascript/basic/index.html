@@ -58,13 +58,43 @@
         
 <div class='site-header' role='banner'>
     <h1>
-        CLI - 备忘录
+        JavaScript 基础知识 - 备忘录
     </h1>
 </div>
 <div class="md_content">
     <div id="sheet_box">
-    <div id="sheet_column" hidden></div>
+    <div id="sheet_column" hidden>2</div>
     
+
+<h2 id="基本值和类型">基本值和类型</h2>
+
+<p>值有类型，但变量无类型</p>
+
+<p>内置类型：</p>
+
+<ul>
+<li>字符串（string）</li>
+<li>数字（number）</li>
+<li>布尔值（boolean）</li>
+<li>null 和 undefined</li>
+<li>对象（object）</li>
+<li>符号（symbol）</li>
+</ul>
+
+<h3 id="typeof">typeof</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#080;font-weight:bold">typeof</span> <span style="background-color:#fff0f0">&#34;helloworld&#34;</span>; <span style="color:#888">// string
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">typeof</span> <span style="color:#00d;font-weight:bold">10</span>; <span style="color:#888">// number
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">typeof</span> <span style="color:#080;font-weight:bold">true</span>; <span style="color:#888">// bollean
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">typeof</span> <span style="color:#080;font-weight:bold">null</span>; <span style="color:#888">// object
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">typeof</span> a; <span style="color:#888">// undefined
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">typeof</span> []; <span style="color:#888">// object
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">typeof</span> Symbol(<span style="background-color:#fff0f0">&#34;a&#34;</span>); <span style="color:#888">// symbol
+</span><span style="color:#888"></span><span style="color:#080;font-weight:bold">typeof</span> <span style="color:#080;font-weight:bold">function</span>(){}; <span style="color:#888">// function
+</span></code></pre></div>
+<h2 id="内置子对象">内置子对象</h2>
+
+<h3 id="array">Array</h3>
+
 
     <script>
         let colNum = document.querySelector("#sheet_column").innerText;

@@ -30,11 +30,11 @@
 
     <title>EsilyZhang 的备忘单</title>
     
-    <link rel="stylesheet" href="/sass/main.min.ecb251ca6e9aa6da8f72a6ffef89852dc728315d3683f24f903bb1d6e525267f.css">
+    <link rel="stylesheet" href="/sass/main.min.97ef104245886f62f208a3f927e5b782e9ca7977a33f55b30e5f46e415c7372b.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
 
-<link rel="stylesheet" href="/sass/markdown.min.927f665213baf4b2bcce6f05882b082730be68f37fb051ad2dc1666566559b58.css">
+<link rel="stylesheet" href="/sass/markdown.min.fab29f2a847a663f96443fcaa4719dab072d38a345a61cd879a9641226c35a75.css">
 
 </head>
 
@@ -274,6 +274,18 @@ $ adb pull /sdcard/test.txt pulledTest.txt
         Array.prototype.max = function () {
             return Math.max.apply(null, this);
         };
+        Array.prototype.minindex = function (col) {
+            let _index = 0,
+                min = this[0];
+            for (var i = 1; i < col; i++) {
+                if (min > this[i]) {
+                    min = this[i];
+                    _index = i;
+                }
+            }
+            return _index;
+        };
+
 
         for (let key in sheetBox.children) {
             eleList.push(sheetBox.children[key]);
@@ -327,7 +339,7 @@ $ adb pull /sdcard/test.txt pulledTest.txt
                     }
                 }
                 es.forEach((e, i) => {
-                    let _colOrder = i % col;
+                    let _colOrder = _hs.minindex(col);
                     e.style.left = _colOrder * _e_offset + 'px';
                     e.style.top = _hs[_colOrder] + 'px';
                     e.style.width = (_w - (col - 1) * _w * 0.012) / col + 'px';
